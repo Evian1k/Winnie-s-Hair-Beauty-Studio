@@ -1,0 +1,50 @@
+{
+  "success": true,
+  "query": "professional makeup artist applying makeup to African woman",
+  "count": 6,
+  "ranked": false,
+  "results": [
+    {
+      "original_url": "https://sfile.chatglm.cn/images-ppt/04784dfeae4d.jpg",
+      "caption": "",
+      "source": "Dreamstime.com",
+      "original_width": "1600px",
+      "original_height": "1158px"
+    },
+    {
+      "original_url": "https://sfile.chatglm.cn/images-ppt/eebb3f44105e.jpg",
+      "caption": "",
+      "source": "Fashionista",
+      "original_width": "1920px",
+      "original_height": "1280px"
+    },
+    {
+      "original_url": "https://sfile.chatglm.cn/images-ppt/2c284b29b962.jpg",
+      "caption": "",
+      "source": "123RF",
+      "original_width": "866px",
+      "original_height": "1300px"
+    },
+    {
+      "original_url": "https://sfile.chatglm.cn/images-ppt/d68a7d2ea1e2.jpg",
+      "caption": "",
+      "source": "Forbes Africa",
+      "original_width": "2560px",
+      "original_height": "1710px"
+    },
+    {
+      "original_url": "https://sfile.chatglm.cn/images-ppt/73ef1380e6c9.jpg",
+      "caption": "",
+      "source": "Canvas Rebel",
+      "original_width": "1920px",
+      "original_height": "1439px"
+    },
+    {
+      "original_url": "https://sfile.chatglm.cn/images-ppt/e35e57058017.jpg",
+      "caption": "",
+      "source": "Black Enterprise",
+      "original_width": "1284px",
+      "original_height": "800px"
+    }
+  ]
+}

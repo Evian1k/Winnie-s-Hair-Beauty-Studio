@@ -1,0 +1,64 @@
+{
+  "success": true,
+  "query": "happy African woman smiling beauty portrait headshot",
+  "count": 8,
+  "ranked": false,
+  "results": [
+    {
+      "original_url": "https://sfile.chatglm.cn/images-ppt/9d42851274ef.jpg",
+      "caption": "",
+      "source": "Shutterstock",
+      "original_width": "1500px",
+      "original_height": "779px"
+    },
+    {
+      "original_url": "https://sfile.chatglm.cn/images-ppt/94ec56f8fe9c.jpg",
+      "caption": "",
+      "source": "PeopleImages",
+      "original_width": "1731px",
+      "original_height": "1155px"
+    },
+    {
+      "original_url": "https://sfile.chatglm.cn/images-ppt/87c0034ed79d.jpg",
+      "caption": "",
+      "source": "123RF",
+      "original_width": "1300px",
+      "original_height": "866px"
+    },
+    {
+      "original_url": "https://sfile.chatglm.cn/images-ppt/5140c1a76725.jpg",
+      "caption": "",
+      "source": "Dreamstime.com",
+      "original_width": "1600px",
+      "original_height": "1157px"
+    },
+    {
+      "original_url": "https://sfile.chatglm.cn/images-ppt/720409d7c7ab.jpg",
+      "caption": "",
+      "source": "Alamy",
+      "original_width": "1300px",
+      "original_height": "956px"
+    },
+    {
+      "original_url": "https://sfile.chatglm.cn/images-ppt/aab1d0f5caa5.jpg",
+      "caption": "",
+      "source": "123RF",
+      "original_width": "863px",
+      "original_height": "1300px"
+    },
+    {
+      "original_url": "https://sfile.chatglm.cn/images-ppt/40d6b26a9c0d.jpg",
+      "caption": "",
+      "source": "123RF",
+      "original_width": "1300px",
+      "original_height": "866px"
+    },
+    {
+      "original_url": "https://sfile.chatglm.cn/images-ppt/d12f07da2d15.jpg",
+      "caption": "",
+      "source": "The Business Journals",
+      "original_width": "1200px",
+      "original_height": "676px"
+    }
+  ]
+}

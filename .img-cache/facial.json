@@ -1,0 +1,50 @@
+{
+  "success": true,
+  "query": "luxury spa facial treatment woman relaxing",
+  "count": 6,
+  "ranked": false,
+  "results": [
+    {
+      "original_url": "https://sfile.chatglm.cn/images-ppt/7eefed5d5d7d.jpg",
+      "caption": "",
+      "source": "Bella Sante",
+      "original_width": "1920px",
+      "original_height": "2560px"
+    },
+    {
+      "original_url": "https://sfile.chatglm.cn/images-ppt/299e93bd86bb.jpg",
+      "caption": "",
+      "source": "Inner Beauty Concepts",
+      "original_width": "1920px",
+      "original_height": "1080px"
+    },
+    {
+      "original_url": "https://sfile.chatglm.cn/images-ppt/25e5ca63b373.png",
+      "caption": "",
+      "source": "luxemassagespafacial.com",
+      "original_width": "768px",
+      "original_height": "1152px"
+    },
+    {
+      "original_url": "https://sfile.chatglm.cn/images-ppt/a861d31ab00d.jpg",
+      "caption": "",
+      "source": "Naturopathica",
+      "original_width": "1200px",
+      "original_height": "824px"
+    },
+    {
+      "original_url": "https://sfile.chatglm.cn/images-ppt/9c150cff485c.jpg",
+      "caption": "",
+      "source": "zhen day spa & Beauty",
+      "original_width": "2560px",
+      "original_height": "1709px"
+    },
+    {
+      "original_url": "https://sfile.chatglm.cn/images-ppt/f6637fe36eeb.jpg",
+      "caption": "",
+      "source": "Alamy",
+      "original_width": "865px",
+      "original_height": "1390px"
+    }
+  ]
+}

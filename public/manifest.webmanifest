@@ -1,0 +1,19 @@
+{
+  "name": "Winnie's Hair & Beauty Studio",
+  "short_name": "Winnie's",
+  "description": "Luxury hair, nails, makeup and beauty spa in Katani, Kenya. ★★★★★ 5.0 Google rating.",
+  "start_url": "/",
+  "display": "standalone",
+  "background_color": "#FFF5F7",
+  "theme_color": "#B76E79",
+  "orientation": "portrait-primary",
+  "categories": ["beauty", "lifestyle", "shopping"],
+  "icons": [
+    {
+      "src": "/icon.svg",
+      "sizes": "any",
+      "type": "image/svg+xml",
+      "purpose": "any maskable"
+    }
+  ]
+}

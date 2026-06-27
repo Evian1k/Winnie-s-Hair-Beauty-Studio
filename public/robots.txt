@@ -1,0 +1,4 @@
+User-agent: *
+Allow: /
+
+Sitemap: https://winnieshairandbeauty.co.ke/sitemap.xml

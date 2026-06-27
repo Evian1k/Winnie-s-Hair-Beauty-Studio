@@ -1,0 +1,50 @@
+{
+  "success": true,
+  "query": "luxury modern hair salon interior with elegant chairs and mirrors",
+  "count": 6,
+  "ranked": false,
+  "results": [
+    {
+      "original_url": "https://sfile.chatglm.cn/images-ppt/12a31a152fe9.jpg",
+      "caption": "",
+      "source": "Landmarks Architects",
+      "original_width": "1200px",
+      "original_height": "1200px"
+    },
+    {
+      "original_url": "https://sfile.chatglm.cn/images-ppt/7a5d8b07bb8c.jpeg",
+      "caption": "",
+      "source": "Picjumbo",
+      "original_width": "2210px",
+      "original_height": "3315px"
+    },
+    {
+      "original_url": "https://sfile.chatglm.cn/images-ppt/06a25c33f3d9.png",
+      "caption": "",
+      "source": "Noona",
+      "original_width": "1600px",
+      "original_height": "960px"
+    },
+    {
+      "original_url": "https://sfile.chatglm.cn/images-ppt/cab219cbd04b.jpg",
+      "caption": "",
+      "source": "Landmarks Architects",
+      "original_width": "1200px",
+      "original_height": "1200px"
+    },
+    {
+      "original_url": "https://sfile.chatglm.cn/images-ppt/23f7c91772df.jpg",
+      "caption": "",
+      "source": "Alibaba.com",
+      "original_width": "1200px",
+      "original_height": "1200px"
+    },
+    {
+      "original_url": "https://sfile.chatglm.cn/images-ppt/4e7e0f4661c8.jpg",
+      "caption": "",
+      "source": "IMAGE Studios",
+      "original_width": "1920px",
+      "original_height": "1280px"
+    }
+  ]
+}
