@@ -18,6 +18,7 @@ import { Input } from "@/components/ui/input";
 import { Button } from "@/components/ui/button";
 import { toast } from "sonner";
 import { cn } from "@/lib/utils";
+import { LogoMark } from "@/components/logo";
 
 // TikTok icon (lucide doesn't have one)
 function TikTokIcon({ className }: { className?: string }) {
@@ -112,8 +113,8 @@ export function Footer() {
               onClick={() => setView("home")}
               className="flex items-center gap-3 mb-4 focus-luxe rounded-sm"
             >
-              <div className="w-11 h-11 rounded-full bg-gradient-to-br from-[#B76E79] via-[#D4A574] to-[#D4AF37] flex items-center justify-center shadow-luxe">
-                <span className="font-serif text-xl font-bold text-white">W</span>
+              <div className="w-11 h-11 rounded-full overflow-hidden shadow-luxe">
+                <LogoMark size={44} className="w-full h-full" />
               </div>
               <div className="text-left">
                 <p className="font-serif text-lg font-semibold">Winnie's</p>

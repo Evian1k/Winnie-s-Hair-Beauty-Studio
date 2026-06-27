@@ -23,6 +23,7 @@ import {
   DialogTrigger,
 } from "@/components/ui/dialog";
 import { Input } from "@/components/ui/input";
+import { LogoMark } from "@/components/logo";
 import { SERVICES, FAQS, PACKAGES } from "@/lib/salon-data";
 
 export function Navbar() {
@@ -97,9 +98,8 @@ export function Navbar() {
             whileTap={{ scale: 0.98 }}
             aria-label="Winnie's Hair & Beauty Studio home"
           >
-            <div className="relative w-10 h-10 sm:w-11 sm:h-11 rounded-full bg-gradient-to-br from-[#B76E79] via-[#D4A574] to-[#D4AF37] flex items-center justify-center shadow-luxe">
-              <span className="font-serif text-xl sm:text-2xl font-bold text-white">W</span>
-              <div className="absolute inset-0 rounded-full ring-1 ring-white/30" />
+            <div className="relative w-10 h-10 sm:w-11 sm:h-11 rounded-full overflow-hidden shadow-luxe">
+              <LogoMark size={44} showAccent={false} className="w-full h-full" />
             </div>
             <div className="hidden sm:flex flex-col items-start leading-none">
               <span className="font-serif text-base font-semibold text-foreground tracking-wide">
@@ -283,8 +283,8 @@ export function Navbar() {
               >
                 <SheetHeader className="px-6 pt-6 pb-4 text-left">
                   <SheetTitle className="flex items-center gap-3 font-serif text-xl">
-                    <div className="w-10 h-10 rounded-full bg-gradient-to-br from-[#B76E79] via-[#D4A574] to-[#D4AF37] flex items-center justify-center">
-                      <span className="text-white font-bold">W</span>
+                    <div className="w-10 h-10 rounded-full overflow-hidden">
+                      <LogoMark size={40} showAccent={false} className="w-full h-full" />
                     </div>
                     Winnie's
                   </SheetTitle>

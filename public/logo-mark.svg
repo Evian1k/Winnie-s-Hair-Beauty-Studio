@@ -1,0 +1,39 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 100 100" fill="none">
+  <defs>
+    <linearGradient id="markGrad" x1="0%" y1="0%" x2="100%" y2="100%">
+      <stop offset="0%" stop-color="#B76E79"/>
+      <stop offset="50%" stop-color="#D4A574"/>
+      <stop offset="100%" stop-color="#D4AF37"/>
+    </linearGradient>
+    <radialGradient id="markRose" cx="50%" cy="40%" r="60%">
+      <stop offset="0%" stop-color="#FFE8EC"/>
+      <stop offset="60%" stop-color="#F4B8C4"/>
+      <stop offset="100%" stop-color="#B76E79"/>
+    </radialGradient>
+  </defs>
+
+  <!-- Gold disc -->
+  <circle cx="50" cy="50" r="49" fill="url(#markGrad)"/>
+  <!-- Inner ring -->
+  <circle cx="50" cy="50" r="45" fill="none" stroke="#FFFFFF" stroke-width="0.5" opacity="0.35"/>
+
+  <!-- Rose accent -->
+  <g transform="translate(50, 28)">
+    <ellipse cx="-4" cy="0" rx="3.5" ry="5" fill="url(#markRose)" opacity="0.85" transform="rotate(-35)"/>
+    <ellipse cx="4" cy="0" rx="3.5" ry="5" fill="url(#markRose)" opacity="0.85" transform="rotate(35)"/>
+    <ellipse cx="0" cy="-3" rx="3.5" ry="4" fill="url(#markRose)"/>
+    <circle cx="0" cy="0" r="1.5" fill="#FFFFFF" opacity="0.9"/>
+  </g>
+
+  <!-- W -->
+  <text x="50" y="68" text-anchor="middle"
+        font-family="Georgia, 'Times New Roman', serif"
+        font-size="40"
+        font-weight="bold"
+        fill="#FFFFFF">W</text>
+
+  <!-- Divider -->
+  <line x1="32" y1="78" x2="46" y2="78" stroke="#FFFFFF" stroke-width="0.4" opacity="0.6"/>
+  <circle cx="50" cy="78" r="0.8" fill="#FFFFFF" opacity="0.9"/>
+  <line x1="54" y1="78" x2="68" y2="78" stroke="#FFFFFF" stroke-width="0.4" opacity="0.6"/>
+</svg>

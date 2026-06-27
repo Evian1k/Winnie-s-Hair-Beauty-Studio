@@ -3,6 +3,7 @@
 import * as React from "react";
 import { motion, AnimatePresence } from "framer-motion";
 import { useSalonStore } from "@/lib/salon-store";
+import { LogoMark } from "@/components/logo";
 
 export function LoadingScreen() {
   const initialLoading = useSalonStore((s) => s.initialLoading);
@@ -33,22 +34,26 @@ export function LoadingScreen() {
           <div className="relative flex flex-col items-center gap-8">
             {/* Logo mark */}
             <motion.div
-              className="relative w-24 h-24 flex items-center justify-center"
+              className="relative w-28 h-28 flex items-center justify-center"
               initial={{ scale: 0.8, opacity: 0 }}
               animate={{ scale: 1, opacity: 1 }}
               transition={{ duration: 0.8, ease: [0.4, 0, 0.2, 1] }}
             >
+              {/* Rotating outer rings */}
               <motion.div
                 className="absolute inset-0 rounded-full border-2 border-[#D4AF37]"
-                animate={{ scale: [1, 1.1, 1], opacity: [0.5, 1, 0.5] }}
-                transition={{ duration: 2, repeat: Infinity, ease: "easeInOut" }}
+                animate={{ scale: [1, 1.08, 1], opacity: [0.4, 0.9, 0.4] }}
+                transition={{ duration: 2.5, repeat: Infinity, ease: "easeInOut" }}
               />
               <motion.div
                 className="absolute inset-2 rounded-full border border-[#B76E79]"
                 animate={{ scale: [1.1, 1, 1.1], opacity: [0.3, 0.6, 0.3] }}
-                transition={{ duration: 2, repeat: Infinity, ease: "easeInOut", delay: 0.3 }}
+                transition={{ duration: 2.5, repeat: Infinity, ease: "easeInOut", delay: 0.3 }}
               />
-              <div className="font-serif text-4xl font-bold text-gradient-gold">W</div>
+              {/* Premium logo mark */}
+              <div className="relative w-20 h-20 rounded-full overflow-hidden shadow-luxe-lg">
+                <LogoMark size={80} className="w-full h-full" />
+              </div>
             </motion.div>
 
             {/* Brand name */}
