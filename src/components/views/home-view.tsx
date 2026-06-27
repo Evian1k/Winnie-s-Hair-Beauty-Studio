@@ -60,7 +60,7 @@ function Hero() {
         className="absolute inset-0 -z-20"
       >
         <img
-          src="/images/salon-interior.svg"
+          src="https://sfile.chatglm.cn/images-ppt/12a31a152fe9.jpg"
           alt="Winnie's Hair & Beauty Studio luxury salon interior"
           className="w-full h-full object-cover"
         />
@@ -274,7 +274,7 @@ function AboutPreview() {
             <div className="space-y-4">
               <div className="img-zoom rounded-3xl overflow-hidden shadow-luxe aspect-[3/4]">
                 <img
-                  src="/images/team-winnie.svg"
+                  src="https://sfile.chatglm.cn/images-ppt/df0444e28785.jpg"
                   alt="Winnie, founder of Winnie's Hair & Beauty Studio"
                   className="w-full h-full object-cover"
                   loading="lazy"
@@ -282,7 +282,7 @@ function AboutPreview() {
               </div>
               <div className="img-zoom rounded-3xl overflow-hidden shadow-luxe aspect-square">
                 <img
-                  src="/images/salon-reception.svg"
+                  src="https://sfile.chatglm.cn/images-ppt/cab219cbd04b.jpg"
                   alt="Salon styling station"
                   className="w-full h-full object-cover"
                   loading="lazy"
@@ -292,7 +292,7 @@ function AboutPreview() {
             <div className="space-y-4 pt-8">
               <div className="img-zoom rounded-3xl overflow-hidden shadow-luxe aspect-square">
                 <img
-                  src="/images/salon-products.svg"
+                  src="https://sfile.chatglm.cn/images-ppt/d0f0d8bd1344.jpg"
                   alt="Premium beauty products"
                   className="w-full h-full object-cover"
                   loading="lazy"
@@ -300,7 +300,7 @@ function AboutPreview() {
               </div>
               <div className="img-zoom rounded-3xl overflow-hidden shadow-luxe aspect-[3/4]">
                 <img
-                  src="/images/makeup.svg"
+                  src="https://sfile.chatglm.cn/images-ppt/04784dfeae4d.jpg"
                   alt="Makeup artistry at Winnie's"
                   className="w-full h-full object-cover"
                   loading="lazy"
@@ -692,7 +692,7 @@ function FinalCTA() {
           {/* Background */}
           <div className="absolute inset-0">
             <img
-              src="/images/salon-reception.svg"
+              src="https://sfile.chatglm.cn/images-ppt/cab219cbd04b.jpg"
               alt=""
               className="w-full h-full object-cover"
               loading="lazy"

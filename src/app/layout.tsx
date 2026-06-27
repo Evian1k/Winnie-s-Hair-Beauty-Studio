@@ -80,7 +80,7 @@ export const metadata: Metadata = {
     siteName: "Winnie's Hair & Beauty Studio",
     images: [
       {
-        url: "/images/salon-interior.svg",
+        url: "https://sfile.chatglm.cn/images-ppt/12a31a152fe9.jpg",
         width: 1200,
         height: 630,
         alt: "Winnie's Hair & Beauty Studio — Luxury Salon in Katani, Kenya",
@@ -94,7 +94,7 @@ export const metadata: Metadata = {
     title: "Winnie's Hair & Beauty Studio | Luxury Salon in Katani, Kenya",
     description:
       "Premium hair, nails, makeup and beauty spa in Katani, Kenya. ★★★★★ 5.0 Google rating. Book your appointment today.",
-    images: ["/images/salon-interior.svg"],
+    images: ["https://sfile.chatglm.cn/images-ppt/12a31a152fe9.jpg"],
   },
   icons: {
     icon: [
@@ -125,7 +125,7 @@ const structuredData = {
   "@context": "https://schema.org",
   "@type": "HairSalon",
   name: "Winnie's Hair & Beauty Studio",
-  image: "/images/salon-interior.svg",
+  image: "https://sfile.chatglm.cn/images-ppt/12a31a152fe9.jpg",
   description:
     "Premium hair, nails, makeup and beauty spa in Katani, Kenya. ★★★★★ 5.0 Google rating.",
   "@id": "https://winnieshairandbeauty.co.ke",

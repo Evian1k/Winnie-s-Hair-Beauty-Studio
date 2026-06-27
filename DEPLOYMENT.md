@@ -142,7 +142,7 @@ Once Cloudinary is connected:
 1. Upload your salon's real photos via the admin Gallery tab
 2. Copy each uploaded URL
 3. Open `src/lib/salon-data.ts`
-4. Replace the `/images/*.svg` placeholder paths in the `GALLERY`, `PORTFOLIO`, `SERVICES`, and `STYLISTS` arrays with your real Cloudinary URLs
+4. Replace the `https://sfile.chatglm.cn/...` URLs in the `GALLERY`, `PORTFOLIO`, `SERVICES`, and `STYLISTS` arrays with your real Cloudinary URLs
 5. Commit and redeploy
 
 ---
@@ -331,8 +331,8 @@ Run through this list after going live:
 - Try a hard refresh (Ctrl+Shift+R / Cmd+Shift+R)
 
 ### "Images not loading"
-- The demo images are local SVG placeholders in `/public/images/` — no network dependency
-- For production, replace the SVG placeholders with your own Cloudinary URLs (see section 4)
+- The demo images are hosted on `sfile.chatglm.cn` — make sure your network allows this
+- For production, replace demo images with your own Cloudinary URLs (see section 4)
 
 ### "Build fails on Vercel"
 - Check the build logs in Vercel — usually a missing env var or TypeScript error
