@@ -44,7 +44,7 @@ export function FaqView() {
           </>
         }
         subtitle="Everything you need to know before your visit. Can't find your question? Reach out — we love to help."
-        image="https://sfile.chatglm.cn/images-ppt/06a25c33f3d9.png"
+        image="/images/salon-interior.svg"
       />
 
       <section className="pb-20">

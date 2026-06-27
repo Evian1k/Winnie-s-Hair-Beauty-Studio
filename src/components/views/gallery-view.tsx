@@ -59,7 +59,7 @@ export function GalleryView() {
           </>
         }
         subtitle="Real clients. Real results. Filter by category and click any image to view full size."
-        image="https://sfile.chatglm.cn/images-ppt/cab219cbd04b.jpg"
+        image="/images/salon-reception.svg"
       />
 
       <section className="pb-20">

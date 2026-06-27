@@ -30,7 +30,7 @@ export function AboutView() {
           </>
         }
         subtitle="More than a salon — a sanctuary where artistry, care, and community come together to celebrate you."
-        image="https://sfile.chatglm.cn/images-ppt/7a5d8b07bb8c.jpeg"
+        image="/images/salon-stations.svg"
       />
 
       {/* Story */}
@@ -45,7 +45,7 @@ export function AboutView() {
           >
             <div className="img-zoom rounded-3xl overflow-hidden shadow-luxe-lg aspect-[4/5]">
               <img
-                src="https://sfile.chatglm.cn/images-ppt/df0444e28785.jpg"
+                src="/images/team-winnie.svg"
                 alt="Winnie Achieng, Founder"
                 className="w-full h-full object-cover"
                 loading="lazy"

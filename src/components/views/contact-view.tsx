@@ -91,7 +91,7 @@ export function ContactView() {
           </>
         }
         subtitle="We'd love to hear from you. Reach out by phone, WhatsApp, email, or the form below — we respond within 24 hours."
-        image="https://sfile.chatglm.cn/images-ppt/06a25c33f3d9.png"
+        image="/images/salon-interior.svg"
       />
 
       <section className="pb-12">

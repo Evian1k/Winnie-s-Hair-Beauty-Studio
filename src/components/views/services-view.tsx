@@ -44,7 +44,7 @@ export function ServicesView() {
           </>
         }
         subtitle="Every service performed with premium products, certified hands, and an obsessive eye for detail. Transparent pricing. No surprises."
-        image="https://sfile.chatglm.cn/images-ppt/74ac5010ae4a.jpg"
+        image="/images/hair-styling.svg"
       />
 
       {/* Offers banner */}

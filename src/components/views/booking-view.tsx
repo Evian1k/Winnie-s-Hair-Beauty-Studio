@@ -261,7 +261,7 @@ export function BookingView() {
           </>
         }
         subtitle="A few quick steps and you're booked. Confirmation email arrives within minutes."
-        image="https://sfile.chatglm.cn/images-ppt/7a5d8b07bb8c.jpeg"
+        image="/images/salon-stations.svg"
       />
 
       <section className="pb-20">

@@ -34,7 +34,7 @@ export function PricingView() {
           </>
         }
         subtitle="Premium service at fair prices. Browse à la carte services and curated packages below."
-        image="https://sfile.chatglm.cn/images-ppt/d0f0d8bd1344.jpg"
+        image="/images/salon-products.svg"
       />
 
       {/* Offers */}

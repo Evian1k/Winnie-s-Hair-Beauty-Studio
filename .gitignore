@@ -58,3 +58,13 @@ server.log
 # Local database (contains test bookings)
 db/*.db
 db/*.db-journal
+
+# Z.ai scaffolding (removed)
+.zscripts/
+examples/
+mini-services/
+Caddyfile
+download/
+
+# Skills
+/skills/
