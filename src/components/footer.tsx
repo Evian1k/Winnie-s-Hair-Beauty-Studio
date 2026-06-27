@@ -33,19 +33,29 @@ export function Footer() {
   const addSubscriber = useSalonStore((s) => s.addSubscriber);
   const [email, setEmail] = React.useState("");
 
-  const handleSubscribe = (e: React.FormEvent) => {
+  const handleSubscribe = async (e: React.FormEvent) => {
     e.preventDefault();
     if (!email.trim() || !email.includes("@")) {
       toast.error("Please enter a valid email address");
       return;
     }
     const ok = addSubscriber(email.trim());
-    if (ok) {
-      toast.success("Welcome to the Winnie's family! Check your inbox for a special welcome offer.");
-      setEmail("");
-    } else {
+    if (!ok) {
       toast.info("You're already subscribed to our newsletter.");
+      return;
     }
+    // Persist to server
+    try {
+      await fetch("/api/newsletter", {
+        method: "POST",
+        headers: { "Content-Type": "application/json" },
+        body: JSON.stringify({ email: email.trim() }),
+      });
+    } catch (err) {
+      console.error("[Newsletter] API call failed:", err);
+    }
+    toast.success("Welcome to the Winnie's family! Check your inbox for a special welcome offer.");
+    setEmail("");
   };
 
   return (

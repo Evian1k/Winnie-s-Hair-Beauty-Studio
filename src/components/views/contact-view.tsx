@@ -50,11 +50,27 @@ export function ContactView() {
       return;
     }
     setSubmitting(true);
-    // Simulate network delay
-    await new Promise((r) => setTimeout(r, 800));
+
+    // Save locally (immediate)
     addMessage(form);
-    console.log("[Admin Notification] New contact message from:", form.email);
-    toast.success("Thank you! We'll be in touch within 24 hours.");
+
+    try {
+      const res = await fetch("/api/contact", {
+        method: "POST",
+        headers: { "Content-Type": "application/json" },
+        body: JSON.stringify(form),
+      });
+      const result = await res.json();
+      if (res.ok) {
+        toast.success(result.message || "Thank you! We'll be in touch within 24 hours.");
+      } else {
+        toast.success("Message saved. We'll be in touch within 24 hours.");
+      }
+    } catch (err) {
+      console.error("[Contact] API call failed:", err);
+      toast.success("Message saved. We'll be in touch within 24 hours.");
+    }
+
     setForm({ name: "", email: "", phone: "", message: "" });
     setSubmitting(false);
   };

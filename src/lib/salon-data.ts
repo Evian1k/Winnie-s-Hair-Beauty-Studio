@@ -2,6 +2,8 @@
 // In production this would be served from Supabase/Prisma; for now we keep it in
 // a typed module so the admin dashboard can mutate via Zustand + localStorage.
 
+const env = (typeof process !== "undefined" ? process.env : {}) as Record<string, string | undefined>;
+
 export const SALON_INFO = {
   name: "Winnie's Hair & Beauty Studio",
   shortName: "Winnie's",
@@ -10,7 +12,7 @@ export const SALON_INFO = {
     "A luxury hair, nails, and beauty sanctuary in the heart of Katani. We blend world-class technique with warm Kenyan hospitality to make every visit feel like a celebration of you.",
   phone: "+254 790 573509",
   phoneRaw: "+254790573509",
-  whatsapp: "254790573509",
+  whatsapp: env.NEXT_PUBLIC_WHATSAPP_NUMBER || "254790573509",
   email: "hello@winnieshairandbeauty.co.ke",
   address: {
     line1: "Katani Lounge Building",
@@ -20,6 +22,7 @@ export const SALON_INFO = {
     country: "Kenya",
   },
   mapEmbed:
+    env.NEXT_PUBLIC_GOOGLE_MAPS_EMBED ||
     "https://www.google.com/maps?q=Katani+Lounge+Building+Syokimau+Katani+Road+Katani+Kenya&output=embed",
   mapLink: "https://www.google.com/maps/search/?api=1&query=Katani+Lounge+Building+Syokimau+Katani+Road+Katani+Kenya",
   rating: 5.0,
@@ -34,11 +37,12 @@ export const SALON_INFO = {
     { day: "Sunday", open: "10:00", close: "17:00", closed: false },
   ],
   social: {
-    instagram: "https://instagram.com/winnieshairandbeauty",
-    tiktok: "https://tiktok.com/@winnieshairandbeauty",
-    facebook: "https://facebook.com/winnieshairandbeauty",
+    instagram: env.NEXT_PUBLIC_INSTAGRAM_URL || "https://instagram.com/winnieshairandbeauty",
+    tiktok: env.NEXT_PUBLIC_TIKTOK_URL || "https://tiktok.com/@winnieshairandbeauty",
+    facebook: env.NEXT_PUBLIC_FACEBOOK_URL || "https://facebook.com/winnieshairandbeauty",
   },
   founded: 2019,
+  siteUrl: env.NEXT_PUBLIC_SITE_URL || "https://winnieshairandbeauty.co.ke",
 };
 
 export type ServiceCategory = "hair" | "nails" | "beauty";

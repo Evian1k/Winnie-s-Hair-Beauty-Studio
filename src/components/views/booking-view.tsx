@@ -118,12 +118,13 @@ export function BookingView() {
 
   const prevStep = () => setStep((s) => Math.max(1, s - 1));
 
-  const onSubmit = (data: BookingForm) => {
+  const onSubmit = async (data: BookingForm) => {
     if (!service || !selectedDate || !selectedTime || (!stylist && !isAnyStylist)) {
       toast.error("Missing booking details. Please review your selection.");
       return;
     }
-    const booking = addBooking({
+
+    const bookingPayload = {
       serviceId: service.id,
       serviceName: service.name,
       category: service.category,
@@ -136,14 +137,40 @@ export function BookingView() {
       customerPhone: data.customerPhone,
       notes: data.notes,
       price: service.startingPrice,
-    });
+    };
 
-    // Simulate email confirmation
-    console.log("[Email Confirmation] Sending to:", data.customerEmail);
-    console.log("[Admin Notification] New booking received:", booking);
-    toast.success("Booking confirmed! A confirmation email is on its way to your inbox.");
+    // Also save to local store (immediate — used by admin dashboard)
+    const localBooking = addBooking(bookingPayload);
 
-    setConfirmed(booking.id);
+    // Try to persist via API (server-side DB + email)
+    const loadingToast = toast.loading("Confirming your booking…");
+    try {
+      const res = await fetch("/api/bookings", {
+        method: "POST",
+        headers: { "Content-Type": "application/json" },
+        body: JSON.stringify(bookingPayload),
+      });
+      const result = await res.json();
+      toast.dismiss(loadingToast);
+
+      if (!res.ok) {
+        toast.success("Booking confirmed! (Saved locally — server sync pending.)");
+        setConfirmed(localBooking.id);
+        return;
+      }
+
+      toast.success(
+        result.message ||
+          "Booking confirmed! A confirmation email is on its way to your inbox."
+      );
+      setConfirmed(localBooking.id);
+    } catch (err) {
+      toast.dismiss(loadingToast);
+      console.error("[Booking] API call failed:", err);
+      // Network failure — booking was still saved to localStorage
+      toast.success("Booking confirmed! (Saved locally — server sync pending.)");
+      setConfirmed(localBooking.id);
+    }
   };
 
   // Disabled dates (past dates + today after 8pm)

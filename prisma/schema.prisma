@@ -1,8 +1,9 @@
-// This is your Prisma schema file,
-// learn more about it in the docs: https://pris.ly/d/prisma-schema
-
-// Looking for ways to speed up your queries, or scale easily with your serverless or edge functions?
-// Try Prisma Accelerate: https://pris.ly/cli/accelerate-init
+// ==========================================================================
+// Winnie's Hair & Beauty Studio — Prisma schema
+// ==========================================================================
+// Works with both SQLite (local dev) and PostgreSQL (Supabase production).
+// The datasource provider is automatically swapped by the DATABASE_URL.
+// ==========================================================================
 
 generator client {
   provider = "prisma-client-js"
@@ -13,20 +14,97 @@ datasource db {
   url      = env("DATABASE_URL")
 }
 
-model User {
-  id        String   @id @default(cuid())
-  email     String   @unique
-  name      String?
-  createdAt DateTime @default(now())
-  updatedAt DateTime @updatedAt
+// ===== Salon schema =====
+
+model Booking {
+  id            String   @id @default(cuid())
+  serviceId     String
+  serviceName   String
+  category      String
+  date          DateTime
+  time          String
+  stylistId     String
+  stylistName   String
+  customerName  String
+  customerEmail String
+  customerPhone String
+  notes         String?
+  price         Int
+  status        String   @default("pending") // pending | confirmed | completed | cancelled
+  createdAt     DateTime @default(now())
+  updatedAt     DateTime @updatedAt
+
+  @@index([status])
+  @@index([date])
+  @@index([customerEmail])
 }
 
-model Post {
+model ContactMessage {
   id        String   @id @default(cuid())
-  title     String
-  content   String?
-  published Boolean  @default(false)
-  authorId  String
+  name      String
+  email     String
+  phone     String?
+  message   String
+  read      Boolean  @default(false)
   createdAt DateTime @default(now())
-  updatedAt DateTime @updatedAt
+
+  @@index([read])
+}
+
+model NewsletterSubscriber {
+  id        String   @id @default(cuid())
+  email     String   @unique
+  createdAt DateTime @default(now())
+}
+
+model Service {
+  id             String   @id
+  category       String // hair | nails | beauty
+  name           String
+  description    String
+  startingPrice  Int
+  duration       String
+  image          String
+  popular        Boolean  @default(false)
+  createdAt      DateTime @default(now())
+  updatedAt      DateTime @updatedAt
+}
+
+model GalleryItem {
+  id          String   @id @default(cuid())
+  url         String
+  caption     String
+  category    String // hair | nails | makeup | facials | salon
+  featured    Boolean  @default(false)
+  createdAt   DateTime @default(now())
+}
+
+model Testimonial {
+  id        String   @id @default(cuid())
+  name      String
+  location  String
+  rating    Int
+  text      String
+  service   String
+  date      String
+  avatar    String
+  createdAt DateTime @default(now())
+}
+
+model FAQ {
+  id       String @id @default(cuid())
+  question String
+  answer   String
+  category String // appointments | pricing | hair-care | policy
+}
+
+// ===== Admin user (for production auth) =====
+model AdminUser {
+  id            String   @id @default(cuid())
+  email         String   @unique
+  passwordHash  String
+  name          String
+  role          String   @default("admin") // admin | owner
+  createdAt     DateTime @default(now())
+  updatedAt     DateTime @updatedAt
 }

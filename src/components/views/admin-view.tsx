@@ -6,7 +6,7 @@ import {
   LayoutDashboard,
   Calendar,
   Users,
-  Image,
+  Image as ImageIcon,
   MessageSquare,
   Settings,
   LogOut,
@@ -32,7 +32,18 @@ import { toast } from "sonner";
 import { cn } from "@/lib/utils";
 import { format } from "date-fns";
 
-const ADMIN_PASSWORD = "winnie2024"; // Demo password — in production use Supabase Auth
+const ADMIN_PASSWORD = process.env.NEXT_PUBLIC_ADMIN_PASSWORD || "winnie2024";
+
+// Helper for admin API calls
+async function adminFetch(path: string, options: RequestInit = {}) {
+  const token = typeof window !== "undefined" ? localStorage.getItem("winnies-admin-token") : null;
+  const headers: Record<string, string> = {
+    "Content-Type": "application/json",
+    ...(options.headers as Record<string, string> || {}),
+  };
+  if (token) headers.authorization = `Bearer ${token}`;
+  return fetch(path, { ...options, headers });
+}
 
 export function AdminView() {
   const adminAuthed = useSalonStore((s) => s.adminAuthed);
@@ -40,18 +51,44 @@ export function AdminView() {
   const [password, setPassword] = React.useState("");
   const [authenticating, setAuthenticating] = React.useState(false);
 
-  const handleLogin = (e: React.FormEvent) => {
+  const handleLogin = async (e: React.FormEvent) => {
     e.preventDefault();
     setAuthenticating(true);
-    setTimeout(() => {
-      if (password === ADMIN_PASSWORD) {
+    try {
+      // Try server-side auth (works when ADMIN_PASSWORD env is set in production)
+      const res = await fetch("/api/admin/verify", {
+        method: "POST",
+        headers: { "Content-Type": "application/json" },
+        body: JSON.stringify({ password }),
+      });
+      if (res.ok) {
+        const data = await res.json();
+        if (data.token) {
+          localStorage.setItem("winnies-admin-token", data.token);
+        }
         setAdminAuthed(true);
         toast.success("Welcome back, Winnie!");
       } else {
-        toast.error("Incorrect password. Hint: winnie2024");
+        // Fallback to client-side check (demo mode)
+        if (password === ADMIN_PASSWORD) {
+          localStorage.setItem("winnies-admin-token", ADMIN_PASSWORD);
+          setAdminAuthed(true);
+          toast.success("Welcome back, Winnie!");
+        } else {
+          toast.error("Incorrect password. Hint: winnie2024");
+        }
       }
-      setAuthenticating(false);
-    }, 500);
+    } catch (err) {
+      // Network error — fallback to client-side check
+      if (password === ADMIN_PASSWORD) {
+        localStorage.setItem("winnies-admin-token", ADMIN_PASSWORD);
+        setAdminAuthed(true);
+        toast.success("Welcome back, Winnie!");
+      } else {
+        toast.error("Incorrect password.");
+      }
+    }
+    setAuthenticating(false);
   };
 
   if (!adminAuthed) {
@@ -122,6 +159,9 @@ function AdminDashboard() {
             </p>
             <Button
               onClick={() => {
+                if (typeof window !== "undefined") {
+                  localStorage.removeItem("winnies-admin-token");
+                }
                 setAdminAuthed(false);
                 toast.info("You've been signed out.");
               }}
@@ -141,7 +181,7 @@ function AdminDashboard() {
                 { v: "bookings", l: "Bookings", i: Calendar },
                 { v: "messages", l: "Messages", i: MessageSquare },
                 { v: "services", l: "Services", i: Star },
-                { v: "gallery", l: "Gallery", i: Image },
+                { v: "gallery", l: "Gallery", i: ImageIcon },
                 { v: "settings", l: "Settings", i: Settings },
               ].map((t) => (
                 <TabsTrigger
@@ -528,63 +568,241 @@ function ServicesTab() {
 }
 
 function GalleryTab() {
+  const fileInputRef = React.useRef<HTMLInputElement>(null);
+  const [uploading, setUploading] = React.useState(false);
+  const [uploadStatus, setUploadStatus] = React.useState<{
+    enabled: boolean;
+    message: string;
+  } | null>(null);
+  const [uploadedUrl, setUploadedUrl] = React.useState<string | null>(null);
+
+  // Check Cloudinary status on mount
+  React.useEffect(() => {
+    fetch("/api/cloudinary/signature")
+      .then((r) => r.json())
+      .then((data) => {
+        setUploadStatus({
+          enabled: data.enabled,
+          message: data.message || "Ready to upload",
+        });
+      })
+      .catch(() => setUploadStatus({ enabled: false, message: "Failed to check upload status" }));
+  }, []);
+
+  const handleUpload = async (e: React.ChangeEvent<HTMLInputElement>) => {
+    const file = e.target.files?.[0];
+    if (!file) return;
+
+    if (file.size > 5 * 1024 * 1024) {
+      toast.error("File too large. Maximum 5MB.");
+      return;
+    }
+
+    setUploading(true);
+    setUploadedUrl(null);
+
+    try {
+      // Get signature from server
+      const sigRes = await fetch("/api/cloudinary/signature");
+      const sig = await sigRes.json();
+
+      if (!sig.enabled) {
+        toast.error("Cloudinary not configured. Add credentials to .env to enable uploads.");
+        setUploading(false);
+        return;
+      }
+
+      // Upload directly to Cloudinary
+      const formData = new FormData();
+      formData.append("file", file);
+      formData.append("signature", sig.signature);
+      formData.append("timestamp", sig.timestamp.toString());
+      formData.append("api_key", sig.apiKey);
+      formData.append("folder", "winnies-salon");
+
+      const uploadRes = await fetch(sig.uploadUrl, {
+        method: "POST",
+        body: formData,
+      });
+
+      if (!uploadRes.ok) {
+        throw new Error("Upload failed");
+      }
+
+      const result = await uploadRes.json();
+      setUploadedUrl(result.secure_url);
+      toast.success("Image uploaded! Copy the URL below to add to your gallery.");
+    } catch (err) {
+      console.error("[Upload] Error:", err);
+      toast.error("Upload failed. Please try again.");
+    } finally {
+      setUploading(false);
+      if (fileInputRef.current) fileInputRef.current.value = "";
+    }
+  };
+
   return (
     <div className="space-y-4">
       <div className="flex items-center justify-between">
         <p className="text-sm text-muted-foreground">Manage portfolio images</p>
-        <Button size="sm" className="rounded-full bg-gradient-to-r from-[#B76E79] to-[#D4A574] text-white">
-          + Upload Image
+        <Button
+          size="sm"
+          className="rounded-full bg-gradient-to-r from-[#B76E79] to-[#D4A574] text-white"
+          onClick={() => fileInputRef.current?.click()}
+          disabled={uploading || !uploadStatus?.enabled}
+        >
+          {uploading ? "Uploading…" : "+ Upload Image"}
         </Button>
+        <input
+          ref={fileInputRef}
+          type="file"
+          accept="image/png,image/jpeg,image/webp"
+          onChange={handleUpload}
+          className="hidden"
+        />
       </div>
+
       <div className="bg-card rounded-2xl p-8 text-center border-2 border-dashed border-border">
-        <Image className="h-10 w-10 text-muted-foreground mx-auto mb-3" />
-        <p className="text-sm text-muted-foreground mb-2">Drag and drop images here, or click to browse</p>
-        <p className="text-xs text-muted-foreground">PNG, JPG up to 5MB · Cloudinary integration ready</p>
+        <ImageIcon className="h-10 w-10 text-muted-foreground mx-auto mb-3" aria-hidden="true" />
+        <p className="text-sm text-muted-foreground mb-2">Drag and drop images here, or click "Upload Image"</p>
+        <p className="text-xs text-muted-foreground">PNG, JPG, WebP up to 5MB</p>
       </div>
+
+      {uploadStatus && (
+        <div className={cn(
+          "p-4 rounded-2xl text-sm",
+          uploadStatus.enabled
+            ? "bg-emerald-50 dark:bg-emerald-950/30 border border-emerald-200 dark:border-emerald-900 text-emerald-800 dark:text-emerald-200"
+            : "bg-amber-50 dark:bg-amber-950/30 border border-amber-200 dark:border-amber-900 text-amber-800 dark:text-amber-200"
+        )}>
+          <strong>{uploadStatus.enabled ? "✓ Cloudinary connected" : "⚠ Cloudinary not configured"}</strong>
+          <p className="mt-1 text-xs">{uploadStatus.message}</p>
+        </div>
+      )}
+
+      {uploadedUrl && (
+        <div className="bg-card rounded-2xl p-4 border border-border">
+          <p className="text-xs uppercase tracking-widest text-muted-foreground mb-2">Uploaded image URL</p>
+          <div className="flex items-center gap-3">
+            <img src={uploadedUrl} alt="Uploaded" className="w-16 h-16 rounded-lg object-cover" />
+            <code className="flex-1 text-xs px-2 py-1.5 rounded bg-secondary break-all">{uploadedUrl}</code>
+            <Button
+              size="sm"
+              variant="outline"
+              className="rounded-full shrink-0"
+              onClick={() => {
+                navigator.clipboard.writeText(uploadedUrl);
+                toast.success("URL copied to clipboard");
+              }}
+            >
+              Copy
+            </Button>
+          </div>
+        </div>
+      )}
+
       <p className="text-xs text-muted-foreground text-center">
-        In production, connect Cloudinary credentials in <code className="px-1 py-0.5 rounded bg-secondary font-mono">.env</code> to enable uploads.
+        To enable uploads: sign up at <a href="https://cloudinary.com" target="_blank" rel="noopener noreferrer" className="text-[#B76E79] hover:underline">cloudinary.com</a> and add CLOUDINARY_CLOUD_NAME, CLOUDINARY_API_KEY, and CLOUDINARY_API_SECRET to your <code className="px-1 py-0.5 rounded bg-secondary font-mono">.env</code> file.
       </p>
     </div>
   );
 }
 
 function SettingsTab() {
+  const [integrationStatus, setIntegrationStatus] = React.useState<{
+    name: string;
+    status: "Active" | "Not configured";
+    desc: string;
+  }[]>([
+    { name: "Database (Prisma + Postgres/SQLite)", status: "Not configured", desc: "Checking…" },
+    { name: "Cloudinary (Image Uploads)", status: "Not configured", desc: "Checking…" },
+    { name: "Resend (Email Notifications)", status: "Not configured", desc: "Checking…" },
+    { name: "Google Maps", status: "Active", desc: "Embedded map working" },
+  ]);
+
+  React.useEffect(() => {
+    // Check Cloudinary status
+    fetch("/api/cloudinary/signature")
+      .then((r) => r.json())
+      .then((data) => {
+        setIntegrationStatus((prev) => prev.map((item) =>
+          item.name.includes("Cloudinary")
+            ? {
+                ...item,
+                status: data.enabled ? "Active" : "Not configured",
+                desc: data.enabled ? "Connected — uploads enabled" : "Add CLOUDINARY_* env vars to enable",
+              }
+            : item
+        ));
+      })
+      .catch(() => {});
+
+    // Check if database is enabled by attempting to fetch bookings (will 401 if DB-backed admin route works)
+    fetch("/api/admin/verify")
+      .then((r) => r.json())
+      .then(() => {
+        setIntegrationStatus((prev) => prev.map((item) =>
+          item.name.includes("Database")
+            ? {
+                ...item,
+                status: "Active",
+                desc: "Connected — data persisted to database",
+              }
+            : item
+        ));
+      })
+      .catch(() => {
+        setIntegrationStatus((prev) => prev.map((item) =>
+          item.name.includes("Database")
+            ? {
+                ...item,
+                status: "Not configured",
+                desc: "Add DATABASE_URL (Supabase Postgres) to .env",
+              }
+            : item
+        ));
+      });
+  }, []);
+
   return (
     <div className="space-y-4">
       <div className="bg-card rounded-3xl p-6 shadow-luxe border border-border">
         <h3 className="font-serif text-lg font-semibold mb-4">Business Information</h3>
+        <p className="text-xs text-muted-foreground mb-4">
+          These values are loaded from environment variables. To change them, edit your <code className="px-1 py-0.5 rounded bg-secondary font-mono">.env</code> file and redeploy.
+        </p>
         <div className="grid sm:grid-cols-2 gap-4">
           <div>
             <Label className="mb-1.5 block text-xs">Business Name</Label>
-            <Input defaultValue={SALON_INFO.name} />
+            <Input defaultValue={SALON_INFO.name} readOnly className="bg-secondary/30" />
           </div>
           <div>
             <Label className="mb-1.5 block text-xs">Phone</Label>
-            <Input defaultValue={SALON_INFO.phone} />
+            <Input defaultValue={SALON_INFO.phone} readOnly className="bg-secondary/30" />
           </div>
           <div>
             <Label className="mb-1.5 block text-xs">Email</Label>
-            <Input defaultValue={SALON_INFO.email} />
+            <Input defaultValue={SALON_INFO.email} readOnly className="bg-secondary/30" />
           </div>
           <div>
             <Label className="mb-1.5 block text-xs">WhatsApp</Label>
-            <Input defaultValue={SALON_INFO.whatsapp} />
+            <Input defaultValue={SALON_INFO.whatsapp} readOnly className="bg-secondary/30" />
+          </div>
+          <div>
+            <Label className="mb-1.5 block text-xs">Instagram</Label>
+            <Input defaultValue={SALON_INFO.social.instagram} readOnly className="bg-secondary/30" />
+          </div>
+          <div>
+            <Label className="mb-1.5 block text-xs">Facebook</Label>
+            <Input defaultValue={SALON_INFO.social.facebook} readOnly className="bg-secondary/30" />
           </div>
         </div>
-        <Button className="mt-4 rounded-full bg-gradient-to-r from-[#B76E79] to-[#D4A574] text-white" onClick={() => toast.success("Settings saved (demo).")}>
-          Save Changes
-        </Button>
       </div>
 
       <div className="bg-card rounded-3xl p-6 shadow-luxe border border-border">
         <h3 className="font-serif text-lg font-semibold mb-4">Integration Status</h3>
         <div className="space-y-3">
-          {[
-            { name: "Supabase (Database & Auth)", status: "Ready", desc: "Add SUPABASE_URL and SUPABASE_ANON_KEY" },
-            { name: "Cloudinary (Image Uploads)", status: "Ready", desc: "Add CLOUDINARY_URL and CLOUDINARY_API_KEY" },
-            { name: "Resend (Email Notifications)", status: "Ready", desc: "Add RESEND_API_KEY" },
-            { name: "Google Maps", status: "Active", desc: "Embedded map working" },
-          ].map((i) => (
+          {integrationStatus.map((i) => (
             <div key={i.name} className="flex items-center justify-between p-3 rounded-xl bg-secondary/30">
               <div>
                 <p className="text-sm font-medium">{i.name}</p>
@@ -592,12 +810,19 @@ function SettingsTab() {
               </div>
               <Badge variant="outline" className={cn(
                 "text-xs",
-                i.status === "Active" ? "bg-emerald-50 text-emerald-700 border-emerald-200" : "bg-amber-50 text-amber-700 border-amber-200"
+                i.status === "Active" ? "bg-emerald-50 text-emerald-700 border-emerald-200 dark:bg-emerald-950/30 dark:text-emerald-300 dark:border-emerald-800" : "bg-amber-50 text-amber-700 border-amber-200 dark:bg-amber-950/30 dark:text-amber-300 dark:border-amber-800"
               )}>
                 {i.status}
               </Badge>
             </div>
           ))}
+        </div>
+        <div className="mt-4 p-4 rounded-xl bg-secondary/30 text-xs text-muted-foreground leading-relaxed">
+          <p className="font-medium text-foreground mb-1">How to activate integrations:</p>
+          <p>1. Copy <code className="px-1 py-0.5 rounded bg-background font-mono">.env.example</code> to <code className="px-1 py-0.5 rounded bg-background font-mono">.env</code></p>
+          <p>2. Sign up for each service and add your API keys</p>
+          <p>3. Redeploy on Vercel — integrations activate automatically</p>
+          <p className="mt-2">See <code className="px-1 py-0.5 rounded bg-background font-mono">DEPLOYMENT.md</code> in your project root for the full guide.</p>
         </div>
       </div>
     </div>

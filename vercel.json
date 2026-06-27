@@ -1,0 +1,23 @@
+{
+  "$schema": "https://openapi.vercel.sh/vercel.json",
+  "framework": "nextjs",
+  "buildCommand": "bun run build",
+  "installCommand": "bun install",
+  "devCommand": "bun run dev",
+  "regions": ["fra1"],
+  "functions": {
+    "src/app/api/bookings/route.ts": {
+      "maxDuration": 30
+    },
+    "src/app/api/contact/route.ts": {
+      "maxDuration": 30
+    },
+    "src/app/api/cloudinary-signature/route.ts": {
+      "maxDuration": 15
+    },
+    "src/app/api/admin/bookings/route.ts": {
+      "maxDuration": 30
+    }
+  },
+  "crons": []
+}
