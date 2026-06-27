@@ -225,7 +225,7 @@ export function BookingView() {
               <div className="flex flex-col sm:flex-row gap-3 justify-center">
                 <Button
                   onClick={() => setView("home")}
-                  className="bg-gradient-to-r from-[#B76E79] to-[#D4A574] hover:opacity-90 text-white rounded-full px-6"
+                  className="bg-gradient-to-r from-[#0F4C3A] to-[#1A6B52] hover:opacity-90 text-white rounded-full px-6"
                 >
                   Back to Home
                 </Button>
@@ -257,7 +257,7 @@ export function BookingView() {
         eyebrow="Book Appointment"
         title={
           <>
-            Reserve your <span className="text-gradient-rose">moment</span>
+            Reserve your <span className="text-gradient-emerald">moment</span>
           </>
         }
         subtitle="A few quick steps and you're booked. Confirmation email arrives within minutes."
@@ -276,7 +276,7 @@ export function BookingView() {
                       className={cn(
                         "w-10 h-10 sm:w-12 sm:h-12 rounded-full flex items-center justify-center transition-all",
                         step === s.id
-                          ? "bg-gradient-to-br from-[#B76E79] to-[#D4A574] text-white shadow-luxe scale-110"
+                          ? "bg-gradient-to-br from-[#0F4C3A] to-[#1A6B52] text-white shadow-luxe scale-110"
                           : step > s.id
                           ? "bg-[#D4AF37] text-white"
                           : "bg-secondary text-muted-foreground"
@@ -329,18 +329,18 @@ export function BookingView() {
                           className={cn(
                             "group flex items-center gap-3 p-3 rounded-2xl border text-left transition-all",
                             selectedService === s.id
-                              ? "border-[#B76E79] bg-[#B76E79]/5 shadow-luxe"
-                              : "border-border hover:border-[#B76E79]/40 hover:bg-secondary/40"
+                              ? "border-[#B76E79] bg-[#0F4C3A]/5 shadow-luxe"
+                              : "border-border hover:border-[#0F4C3A]/40 hover:bg-secondary/40"
                           )}
                         >
                           <img src={s.image} alt={s.name} className="w-14 h-14 rounded-xl object-cover shrink-0" />
                           <div className="min-w-0 flex-1">
                             <p className="font-serif text-sm font-semibold truncate">{s.name}</p>
                             <p className="text-xs text-muted-foreground truncate">{s.duration}</p>
-                            <p className="text-xs font-medium text-[#B76E79] mt-0.5">From KSh {s.startingPrice.toLocaleString()}</p>
+                            <p className="text-xs font-medium text-[#0F4C3A] mt-0.5">From KSh {s.startingPrice.toLocaleString()}</p>
                           </div>
                           {selectedService === s.id && (
-                            <Check className="h-5 w-5 text-[#B76E79] shrink-0" />
+                            <Check className="h-5 w-5 text-[#0F4C3A] shrink-0" />
                           )}
                         </button>
                       ))}
@@ -385,7 +385,7 @@ export function BookingView() {
                               className={cn(
                                 "py-2.5 rounded-xl text-sm font-medium transition-all",
                                 selectedTime === time
-                                  ? "bg-gradient-to-r from-[#B76E79] to-[#D4A574] text-white shadow-luxe"
+                                  ? "bg-gradient-to-r from-[#0F4C3A] to-[#1A6B52] text-white shadow-luxe"
                                   : "bg-secondary/60 text-muted-foreground hover:bg-secondary"
                               )}
                             >
@@ -416,18 +416,18 @@ export function BookingView() {
                         className={cn(
                           "flex items-center gap-3 p-4 rounded-2xl border text-left transition-all",
                           selectedStylist === "any"
-                            ? "border-[#B76E79] bg-[#B76E79]/5 shadow-luxe"
-                            : "border-border hover:border-[#B76E79]/40 hover:bg-secondary/40"
+                            ? "border-[#B76E79] bg-[#0F4C3A]/5 shadow-luxe"
+                            : "border-border hover:border-[#0F4C3A]/40 hover:bg-secondary/40"
                         )}
                       >
-                        <div className="w-14 h-14 rounded-full bg-gradient-to-br from-[#B76E79]/20 to-[#D4AF37]/20 flex items-center justify-center">
-                          <Sparkles className="h-6 w-6 text-[#B76E79]" />
+                        <div className="w-14 h-14 rounded-full bg-gradient-to-br from-[#0F4C3A]/20 to-[#C9A961]/20 flex items-center justify-center">
+                          <Sparkles className="h-6 w-6 text-[#0F4C3A]" />
                         </div>
                         <div>
                           <p className="font-serif text-sm font-semibold">No preference</p>
                           <p className="text-xs text-muted-foreground">First available stylist</p>
                         </div>
-                        {selectedStylist === "any" && <Check className="h-5 w-5 text-[#B76E79] ml-auto" />}
+                        {selectedStylist === "any" && <Check className="h-5 w-5 text-[#0F4C3A] ml-auto" />}
                       </button>
 
                       {STYLISTS.map((st) => (
@@ -437,8 +437,8 @@ export function BookingView() {
                           className={cn(
                             "flex items-center gap-3 p-4 rounded-2xl border text-left transition-all",
                             selectedStylist === st.id
-                              ? "border-[#B76E79] bg-[#B76E79]/5 shadow-luxe"
-                              : "border-border hover:border-[#B76E79]/40 hover:bg-secondary/40"
+                              ? "border-[#B76E79] bg-[#0F4C3A]/5 shadow-luxe"
+                              : "border-border hover:border-[#0F4C3A]/40 hover:bg-secondary/40"
                           )}
                         >
                           <img src={st.image} alt={st.name} className="w-14 h-14 rounded-full object-cover" />
@@ -446,7 +446,7 @@ export function BookingView() {
                             <p className="font-serif text-sm font-semibold truncate">{st.name}</p>
                             <p className="text-xs text-muted-foreground truncate">{st.role}</p>
                           </div>
-                          {selectedStylist === st.id && <Check className="h-5 w-5 text-[#B76E79] shrink-0" />}
+                          {selectedStylist === st.id && <Check className="h-5 w-5 text-[#0F4C3A] shrink-0" />}
                         </button>
                       ))}
                     </div>
@@ -563,7 +563,7 @@ export function BookingView() {
                       )}
                       <div className="pt-3 border-t border-border flex items-center justify-between">
                         <span className="text-sm font-medium">Starting price</span>
-                        <span className="font-serif text-xl font-bold text-gradient-rose">
+                        <span className="font-serif text-xl font-bold text-gradient-emerald">
                           KSh {service?.startingPrice.toLocaleString() || 0}
                         </span>
                       </div>
@@ -593,7 +593,7 @@ export function BookingView() {
                   <Button
                     type="button"
                     onClick={nextStep}
-                    className="bg-gradient-to-r from-[#B76E79] to-[#D4A574] hover:opacity-90 text-white rounded-full px-6"
+                    className="bg-gradient-to-r from-[#0F4C3A] to-[#1A6B52] hover:opacity-90 text-white rounded-full px-6"
                   >
                     Continue
                     <ChevronRight className="h-4 w-4 ml-1" />
@@ -602,7 +602,7 @@ export function BookingView() {
                   <Button
                     type="button"
                     onClick={onConfirmClick}
-                    className="bg-gradient-to-r from-[#B76E79] to-[#D4A574] hover:opacity-90 text-white rounded-full px-6"
+                    className="bg-gradient-to-r from-[#0F4C3A] to-[#1A6B52] hover:opacity-90 text-white rounded-full px-6"
                   >
                     <CalendarCheck className="h-4 w-4 mr-2" />
                     Confirm Booking
@@ -629,7 +629,7 @@ export function BookingView() {
                 {service && (
                   <div className="mt-4 pt-4 border-t border-border">
                     <p className="text-xs text-muted-foreground">Starting from</p>
-                    <p className="font-serif text-2xl font-bold text-gradient-rose">
+                    <p className="font-serif text-2xl font-bold text-gradient-emerald">
                       KSh {service.startingPrice.toLocaleString()}
                     </p>
                   </div>
@@ -640,7 +640,7 @@ export function BookingView() {
                     onClick={() => (window.location.href = `tel:${SALON_INFO.phoneRaw}`)}
                     variant="outline"
                     size="sm"
-                    className="w-full rounded-full border-[#B76E79]/30 hover:bg-[#B76E79]/5"
+                    className="w-full rounded-full border-[#0F4C3A]/30 hover:bg-[#0F4C3A]/5"
                   >
                     <Phone className="h-3.5 w-3.5 mr-1.5" />
                     Call {SALON_INFO.phone}

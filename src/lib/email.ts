@@ -8,9 +8,9 @@
 import type { Booking } from "@/lib/salon-store";
 
 const RESEND_API_KEY = process.env.RESEND_API_KEY;
-const EMAIL_FROM = process.env.EMAIL_FROM || "Winnie's Hair & Beauty Studio <noreply@winnieshairandbeauty.co.ke>";
-const EMAIL_TO_SALON = process.env.EMAIL_TO_SALON || "hello@winnieshairandbeauty.co.ke";
-const SITE_URL = process.env.NEXT_PUBLIC_SITE_URL || "https://winnieshairandbeauty.co.ke";
+const EMAIL_FROM = process.env.EMAIL_FROM || "Lizaya Hair Studio <noreply@lizayahairstudio.co.ke>";
+const EMAIL_TO_SALON = process.env.EMAIL_TO_SALON || "hello@lizayahairstudio.co.ke";
+const SITE_URL = process.env.NEXT_PUBLIC_SITE_URL || "https://lizayahairstudio.co.ke";
 
 export const emailEnabled = Boolean(RESEND_API_KEY);
 
@@ -74,7 +74,7 @@ export async function sendBookingConfirmationEmail(booking: Booking): Promise<bo
           <p style="color: #666; margin: 0;">We can't wait to see you, ${booking.customerName.split(" ")[0]}.</p>
         </div>
 
-        <p style="color: #444; line-height: 1.6;">Thank you for booking with Winnie's Hair & Beauty Studio. Your appointment is confirmed. Here are the details:</p>
+        <p style="color: #444; line-height: 1.6;">Thank you for booking with Lizaya Hair Studio. Your appointment is confirmed. Here are the details:</p>
 
         <div style="background: #FFF5F7; border-radius: 16px; padding: 24px; margin: 24px 0;">
           <table style="width: 100%; font-size: 14px; color: #444;">
@@ -98,7 +98,7 @@ export async function sendBookingConfirmationEmail(booking: Booking): Promise<bo
         <p style="color: #444; line-height: 1.6;">Need to reschedule? Call us on <a href="tel:+254790573509" style="color: #B76E79;">+254 790 573509</a> or reply to this email.</p>
 
         <div style="text-align: center; margin-top: 32px; padding-top: 24px; border-top: 1px solid #eee;">
-          <p style="color: #999; font-size: 12px; margin: 0;">Winnie's Hair & Beauty Studio</p>
+          <p style="color: #999; font-size: 12px; margin: 0;">Lizaya Hair Studio</p>
           <p style="color: #999; font-size: 12px; margin: 4px 0 0;">Katani Lounge Building, Syokimau–Katani Road, Katani, Kenya</p>
           <p style="color: #999; font-size: 12px; margin: 4px 0 0;"><a href="${SITE_URL}" style="color: #B76E79;">${SITE_URL}</a></p>
         </div>
@@ -202,7 +202,7 @@ export async function sendContactAutoresponder(message: {
         <p style="color: #444; line-height: 1.6;">In the meantime, feel free to browse our services or book an appointment online.</p>
         <a href="${SITE_URL}" style="display: inline-block; background: linear-gradient(135deg, #B76E79, #D4A574); color: white; padding: 12px 28px; border-radius: 999px; text-decoration: none; font-weight: 600; margin-top: 16px;">Visit Our Website</a>
         <div style="text-align: center; margin-top: 32px; padding-top: 24px; border-top: 1px solid #eee; color: #999; font-size: 12px;">
-          <p style="margin: 0;">Winnie's Hair & Beauty Studio</p>
+          <p style="margin: 0;">Lizaya Hair Studio</p>
           <p style="margin: 4px 0 0;">Katani Lounge Building, Syokimau–Katani Road, Katani, Kenya</p>
         </div>
       </div>
@@ -211,7 +211,7 @@ export async function sendContactAutoresponder(message: {
 
   return sendEmail({
     to: message.email,
-    subject: "We've received your message — Winnie's Hair & Beauty Studio",
+    subject: "We've received your message — Lizaya Hair Studio",
     html,
     replyTo: EMAIL_TO_SALON,
   });

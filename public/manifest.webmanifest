@@ -1,13 +1,13 @@
 {
-  "name": "Winnie's Hair & Beauty Studio",
-  "short_name": "Winnie's",
-  "description": "Luxury hair, nails, makeup and beauty spa in Katani, Kenya. ★★★★★ 5.0 Google rating.",
+  "name": "Lizaya Hair Studio",
+  "short_name": "Lizaya",
+  "description": "Salon, SPA & Barbershop at Gateway Mall, Syokimau. 4.1★ rating, 166+ reviews.",
   "start_url": "/",
   "display": "standalone",
-  "background_color": "#FFF5F7",
-  "theme_color": "#B76E79",
+  "background_color": "#FAF6F0",
+  "theme_color": "#0F4C3A",
   "orientation": "portrait-primary",
-  "categories": ["beauty", "lifestyle", "shopping"],
+  "categories": ["beauty", "lifestyle", "health"],
   "icons": [
     {
       "src": "/icon.svg",

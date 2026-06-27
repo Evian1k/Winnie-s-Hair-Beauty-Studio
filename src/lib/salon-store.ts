@@ -178,7 +178,7 @@ export const useSalonStore = create<SalonState>()(
       setPreselectedService: (serviceId) => set({ preselectedService: serviceId }),
     }),
     {
-      name: "winnies-salon-store",
+      name: "lizaya-studio-store",
       storage: createJSONStorage(() => {
         if (typeof window === "undefined") {
           return {

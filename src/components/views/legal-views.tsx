@@ -62,7 +62,7 @@ export function PrivacyView() {
   return (
     <LegalLayout
       eyebrow="Privacy Policy"
-      title={<>Your <span className="text-gradient-rose">privacy</span> matters</>}
+      title={<>Your <span className="text-gradient-emerald">privacy</span> matters</>}
       updated="June 2026"
     >
       <P>
@@ -140,11 +140,11 @@ export function PrivacyView() {
       <H2>9. Contact Us</H2>
       <P>
         If you have questions about this Privacy Policy, please contact us at{" "}
-        <a href={`mailto:${SALON_INFO.email}`} className="text-[#B76E79] hover:underline">
+        <a href={`mailto:${SALON_INFO.email}`} className="text-[#0F4C3A] hover:underline">
           {SALON_INFO.email}
         </a>{" "}
         or call{" "}
-        <a href={`tel:${SALON_INFO.phoneRaw}`} className="text-[#B76E79] hover:underline">
+        <a href={`tel:${SALON_INFO.phoneRaw}`} className="text-[#0F4C3A] hover:underline">
           {SALON_INFO.phone}
         </a>
         .
@@ -157,7 +157,7 @@ export function TermsView() {
   return (
     <LegalLayout
       eyebrow="Terms of Service"
-      title={<>The <span className="text-gradient-rose">fine print</span>, simplified</>}
+      title={<>The <span className="text-gradient-emerald">fine print</span>, simplified</>}
       updated="June 2026"
     >
       <P>
@@ -242,11 +242,11 @@ export function TermsView() {
       <H2>11. Contact</H2>
       <P>
         Questions about these terms? Email us at{" "}
-        <a href={`mailto:${SALON_INFO.email}`} className="text-[#B76E79] hover:underline">
+        <a href={`mailto:${SALON_INFO.email}`} className="text-[#0F4C3A] hover:underline">
           {SALON_INFO.email}
         </a>{" "}
         or call{" "}
-        <a href={`tel:${SALON_INFO.phoneRaw}`} className="text-[#B76E79] hover:underline">
+        <a href={`tel:${SALON_INFO.phoneRaw}`} className="text-[#0F4C3A] hover:underline">
           {SALON_INFO.phone}
         </a>
         .
@@ -283,7 +283,7 @@ export function NotFoundView() {
         <div className="flex flex-col sm:flex-row gap-3 justify-center">
           <button
             onClick={() => setView("home")}
-            className="px-6 py-3 rounded-full bg-gradient-to-r from-[#B76E79] to-[#D4A574] text-white font-medium hover:opacity-90 transition-opacity"
+            className="px-6 py-3 rounded-full bg-gradient-to-r from-[#0F4C3A] to-[#1A6B52] text-white font-medium hover:opacity-90 transition-opacity"
           >
             Back to Home
           </button>

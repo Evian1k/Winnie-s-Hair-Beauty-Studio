@@ -76,7 +76,7 @@ export function ContactView() {
   };
 
   const whatsappUrl = `https://wa.me/${SALON_INFO.whatsapp}?text=${encodeURIComponent(
-    "Hello Winnie's Hair & Beauty Studio!"
+    "Hello Lizaya Hair Studio!"
   )}`;
 
   const today = new Date().getDay(); // 0=Sun, 6=Sat
@@ -87,7 +87,7 @@ export function ContactView() {
         eyebrow="Contact"
         title={
           <>
-            Come say <span className="text-gradient-rose">hello</span>
+            Come say <span className="text-gradient-emerald">hello</span>
           </>
         }
         subtitle="We'd love to hear from you. Reach out by phone, WhatsApp, email, or the form below — we respond within 24 hours."
@@ -209,7 +209,7 @@ export function ContactView() {
               <Button
                 type="submit"
                 disabled={submitting}
-                className="w-full bg-gradient-to-r from-[#B76E79] to-[#D4A574] hover:opacity-90 text-white rounded-full"
+                className="w-full bg-gradient-to-r from-[#0F4C3A] to-[#1A6B52] hover:opacity-90 text-white rounded-full"
               >
                 {submitting ? (
                   "Sending…"
@@ -233,7 +233,7 @@ export function ContactView() {
           >
             <div className="rounded-3xl overflow-hidden shadow-luxe border border-border h-72 sm:h-80">
               <iframe
-                title="Winnie's Hair & Beauty Studio location on Google Maps"
+                title="Lizaya Hair Studio location on Google Maps"
                 src={SALON_INFO.mapEmbed}
                 width="100%"
                 height="100%"
@@ -246,8 +246,8 @@ export function ContactView() {
 
             <div className="bg-card rounded-3xl p-6 shadow-luxe border border-border">
               <div className="flex items-start gap-3 mb-4">
-                <div className="w-10 h-10 rounded-xl bg-gradient-to-br from-[#B76E79]/10 to-[#D4AF37]/10 flex items-center justify-center shrink-0">
-                  <MapPin className="h-5 w-5 text-[#B76E79]" />
+                <div className="w-10 h-10 rounded-xl bg-gradient-to-br from-[#0F4C3A]/10 to-[#C9A961]/10 flex items-center justify-center shrink-0">
+                  <MapPin className="h-5 w-5 text-[#0F4C3A]" />
                 </div>
                 <div>
                   <p className="font-serif text-base font-semibold mb-0.5">Visit our studio</p>
@@ -260,7 +260,7 @@ export function ContactView() {
                     href={SALON_INFO.mapLink}
                     target="_blank"
                     rel="noopener noreferrer"
-                    className="text-xs text-[#B76E79] hover:underline mt-2 inline-block font-medium"
+                    className="text-xs text-[#0F4C3A] hover:underline mt-2 inline-block font-medium"
                   >
                     Get directions →
                   </a>
@@ -268,8 +268,8 @@ export function ContactView() {
               </div>
 
               <div className="flex items-start gap-3 mb-4 pt-4 border-t border-border">
-                <div className="w-10 h-10 rounded-xl bg-gradient-to-br from-[#B76E79]/10 to-[#D4AF37]/10 flex items-center justify-center shrink-0">
-                  <Clock className="h-5 w-5 text-[#B76E79]" />
+                <div className="w-10 h-10 rounded-xl bg-gradient-to-br from-[#0F4C3A]/10 to-[#C9A961]/10 flex items-center justify-center shrink-0">
+                  <Clock className="h-5 w-5 text-[#0F4C3A]" />
                 </div>
                 <div className="flex-1">
                   <p className="font-serif text-base font-semibold mb-2">Opening hours</p>
@@ -280,7 +280,7 @@ export function ContactView() {
                         className={cn(
                           "flex items-center justify-between text-sm py-1.5 px-3 rounded-lg",
                           today === (SALON_INFO.hours.indexOf(h) + 1) % 7
-                            ? "bg-[#B76E79]/10 text-foreground font-medium"
+                            ? "bg-[#0F4C3A]/10 text-foreground font-medium"
                             : "text-muted-foreground"
                         )}
                       >
@@ -293,8 +293,8 @@ export function ContactView() {
               </div>
 
               <div className="flex items-start gap-3 pt-4 border-t border-border">
-                <div className="w-10 h-10 rounded-xl bg-gradient-to-br from-[#B76E79]/10 to-[#D4AF37]/10 flex items-center justify-center shrink-0">
-                  <Instagram className="h-5 w-5 text-[#B76E79]" />
+                <div className="w-10 h-10 rounded-xl bg-gradient-to-br from-[#0F4C3A]/10 to-[#C9A961]/10 flex items-center justify-center shrink-0">
+                  <Instagram className="h-5 w-5 text-[#0F4C3A]" />
                 </div>
                 <div>
                   <p className="font-serif text-base font-semibold mb-2">Follow us</p>

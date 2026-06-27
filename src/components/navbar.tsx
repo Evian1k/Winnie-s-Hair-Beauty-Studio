@@ -51,7 +51,6 @@ export function Navbar() {
     setMobileMenuOpen(false);
   };
 
-  // Search results
   const searchResults = React.useMemo(() => {
     if (!searchQuery.trim()) return { services: [], faqs: [], packages: [] };
     const q = searchQuery.toLowerCase();
@@ -81,9 +80,7 @@ export function Navbar() {
       <motion.header
         className={cn(
           "fixed top-0 left-0 right-0 z-50 transition-all duration-500",
-          scrolled
-            ? "glass shadow-luxe py-2"
-            : "bg-transparent py-4"
+          scrolled ? "glass shadow-luxe py-2" : "bg-transparent py-4"
         )}
         initial={{ y: -100 }}
         animate={{ y: 0 }}
@@ -96,17 +93,17 @@ export function Navbar() {
             className="flex items-center gap-3 group focus-luxe rounded-sm"
             whileHover={{ scale: 1.02 }}
             whileTap={{ scale: 0.98 }}
-            aria-label="Winnie's Hair & Beauty Studio home"
+            aria-label="Lizaya Hair Studio home"
           >
             <div className="relative w-10 h-10 sm:w-11 sm:h-11 rounded-full overflow-hidden shadow-luxe">
               <LogoMark size={44} showAccent={false} className="w-full h-full" />
             </div>
             <div className="hidden sm:flex flex-col items-start leading-none">
-              <span className="font-serif text-base font-semibold text-foreground tracking-wide">
-                Winnie's
+              <span className="font-serif text-lg font-semibold text-foreground tracking-wide">
+                Lizaya
               </span>
-              <span className="text-[9px] uppercase tracking-[0.25em] text-muted-foreground mt-0.5">
-                Hair &amp; Beauty
+              <span className="text-[8px] uppercase tracking-[0.25em] text-muted-foreground mt-0.5">
+                Salon · SPA · Barber
               </span>
             </div>
           </motion.button>
@@ -175,11 +172,7 @@ export function Navbar() {
                           {searchResults.services.map((s) => (
                             <button
                               key={s.id}
-                              onClick={() => {
-                                handleNav("services");
-                                setSearchOpen(false);
-                                setSearchQuery("");
-                              }}
+                              onClick={() => { handleNav("services"); setSearchOpen(false); setSearchQuery(""); }}
                               className="w-full flex items-center gap-3 px-3 py-2.5 rounded-lg hover:bg-secondary/60 text-left transition-colors"
                             >
                               <img src={s.image} alt="" className="w-10 h-10 rounded object-cover" />
@@ -197,14 +190,10 @@ export function Navbar() {
                           {searchResults.packages.map((p) => (
                             <button
                               key={p.id}
-                              onClick={() => {
-                                handleNav("pricing");
-                                setSearchOpen(false);
-                                setSearchQuery("");
-                              }}
+                              onClick={() => { handleNav("pricing"); setSearchOpen(false); setSearchQuery(""); }}
                               className="w-full flex items-center gap-3 px-3 py-2.5 rounded-lg hover:bg-secondary/60 text-left transition-colors"
                             >
-                              <div className="w-10 h-10 rounded bg-gradient-to-br from-[#B76E79]/15 to-[#D4AF37]/15 flex items-center justify-center text-xs font-serif font-bold text-[#B76E79]">
+                              <div className="w-10 h-10 rounded bg-gradient-to-br from-[#0F4C3A]/15 to-[#C9A961]/15 flex items-center justify-center text-xs font-serif font-bold text-[#0F4C3A]">
                                 {p.name.charAt(0)}
                               </div>
                               <div className="min-w-0">
@@ -221,11 +210,7 @@ export function Navbar() {
                           {searchResults.faqs.map((f) => (
                             <button
                               key={f.id}
-                              onClick={() => {
-                                handleNav("faq");
-                                setSearchOpen(false);
-                                setSearchQuery("");
-                              }}
+                              onClick={() => { handleNav("faq"); setSearchOpen(false); setSearchQuery(""); }}
                               className="w-full px-3 py-2.5 rounded-lg hover:bg-secondary/60 text-left transition-colors"
                             >
                               <p className="text-sm font-medium line-clamp-1">{f.question}</p>
@@ -248,17 +233,13 @@ export function Navbar() {
               onClick={() => setTheme(theme === "dark" ? "light" : "dark")}
               aria-label="Toggle dark mode"
             >
-              {mounted && theme === "dark" ? (
-                <Sun className="h-4 w-4" />
-              ) : (
-                <Moon className="h-4 w-4" />
-              )}
+              {mounted && theme === "dark" ? <Sun className="h-4 w-4" /> : <Moon className="h-4 w-4" />}
             </Button>
 
             {/* CTA — Book (desktop) */}
             <Button
               onClick={() => handleNav("book")}
-              className="hidden md:inline-flex bg-gradient-to-r from-[#B76E79] to-[#D4A574] hover:opacity-90 text-white rounded-full shadow-luxe"
+              className="hidden md:inline-flex bg-gradient-to-r from-[#0F4C3A] to-[#1A6B52] hover:opacity-90 text-white rounded-full shadow-luxe"
               size="sm"
             >
               <Calendar className="h-4 w-4 mr-1.5" />
@@ -279,14 +260,14 @@ export function Navbar() {
               </SheetTrigger>
               <SheetContent
                 side="right"
-                className="w-[88vw] max-w-sm p-0 bg-gradient-to-b from-[#FFF5F7] to-white dark:from-[#1A0F1A] dark:to-[#0F0A0F]"
+                className="w-[88vw] max-w-sm p-0 bg-gradient-to-b from-[#F0F5F0] to-white dark:from-[#0A1F17] dark:to-[#0F2A1F]"
               >
                 <SheetHeader className="px-6 pt-6 pb-4 text-left">
                   <SheetTitle className="flex items-center gap-3 font-serif text-xl">
                     <div className="w-10 h-10 rounded-full overflow-hidden">
                       <LogoMark size={40} showAccent={false} className="w-full h-full" />
                     </div>
-                    Winnie's
+                    Lizaya
                   </SheetTitle>
                 </SheetHeader>
 
@@ -301,14 +282,12 @@ export function Navbar() {
                       className={cn(
                         "flex items-center justify-between px-4 py-3 rounded-xl text-left transition-colors",
                         currentView === link.view
-                          ? "bg-gradient-to-r from-[#B76E79]/10 to-[#D4AF37]/10 text-foreground"
+                          ? "bg-gradient-to-r from-[#0F4C3A]/10 to-[#C9A961]/10 text-foreground"
                           : "hover:bg-secondary/60 text-muted-foreground"
                       )}
                     >
                       <span className="font-serif text-lg">{link.label}</span>
-                      <span className="text-[10px] text-muted-foreground/60">
-                        0{i + 1}
-                      </span>
+                      <span className="text-[10px] text-muted-foreground/60">0{i + 1}</span>
                     </motion.button>
                   ))}
                 </nav>
@@ -316,7 +295,7 @@ export function Navbar() {
                 <div className="px-6 pt-4 border-t border-border mt-2 space-y-3">
                   <Button
                     onClick={() => handleNav("book")}
-                    className="w-full bg-gradient-to-r from-[#B76E79] to-[#D4A574] hover:opacity-90 text-white rounded-full"
+                    className="w-full bg-gradient-to-r from-[#0F4C3A] to-[#1A6B52] hover:opacity-90 text-white rounded-full"
                   >
                     <Calendar className="h-4 w-4 mr-2" />
                     Book Appointment
@@ -324,14 +303,12 @@ export function Navbar() {
                   <Button
                     onClick={() => (window.location.href = `tel:${SALON_INFO.phoneRaw}`)}
                     variant="outline"
-                    className="w-full rounded-full border-[#B76E79]/30 hover:bg-[#B76E79]/5"
+                    className="w-full rounded-full border-[#0F4C3A]/30 hover:bg-[#0F4C3A]/5"
                   >
                     <Phone className="h-4 w-4 mr-2" />
                     Call Now
                   </Button>
-                  <p className="text-xs text-center text-muted-foreground pt-2">
-                    {SALON_INFO.phone}
-                  </p>
+                  <p className="text-xs text-center text-muted-foreground pt-2">{SALON_INFO.phone}</p>
                 </div>
               </SheetContent>
             </Sheet>

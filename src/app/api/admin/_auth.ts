@@ -2,7 +2,7 @@ import { NextRequest, NextResponse } from "next/server";
 
 export const runtime = "nodejs";
 
-const ADMIN_PASSWORD = process.env.ADMIN_PASSWORD || "winnie2024";
+const ADMIN_PASSWORD = process.env.ADMIN_PASSWORD || "lizaya2024";
 
 export function verifyAdmin(req: NextRequest): boolean {
   const authHeader = req.headers.get("authorization");

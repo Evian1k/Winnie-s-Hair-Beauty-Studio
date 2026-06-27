@@ -68,3 +68,6 @@ download/
 
 # Skills
 /skills/
+
+# Lizaya image cache (search results + screenshots)
+.lizaya-imgs/

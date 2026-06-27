@@ -73,7 +73,7 @@ export function GalleryView() {
                 className={cn(
                   "px-5 py-2 rounded-full text-sm font-medium transition-all",
                   filter === f.value
-                    ? "bg-gradient-to-r from-[#B76E79] to-[#D4A574] text-white shadow-luxe"
+                    ? "bg-gradient-to-r from-[#0F4C3A] to-[#1A6B52] text-white shadow-luxe"
                     : "bg-secondary/60 text-muted-foreground hover:bg-secondary hover:text-foreground"
                 )}
               >
@@ -108,7 +108,7 @@ export function GalleryView() {
                   <div className="absolute inset-0 bg-gradient-to-t from-black/80 via-black/10 to-transparent opacity-0 group-hover:opacity-100 transition-opacity duration-500" />
                   <div className="absolute inset-0 flex items-end p-4 opacity-0 group-hover:opacity-100 transition-opacity duration-500">
                     <div>
-                      <p className="text-[10px] uppercase tracking-widest text-[#D4AF37] mb-1">{img.category}</p>
+                      <p className="text-[10px] uppercase tracking-widest text-[#C9A961] mb-1">{img.category}</p>
                       <p className="font-serif text-base text-white font-semibold">{img.caption}</p>
                     </div>
                   </div>
@@ -175,7 +175,7 @@ export function GalleryView() {
                 className="max-w-full max-h-[75vh] object-contain rounded-lg shadow-2xl"
               />
               <div className="mt-4 text-center">
-                <p className="text-[10px] uppercase tracking-widest text-[#D4AF37]">
+                <p className="text-[10px] uppercase tracking-widest text-[#C9A961]">
                   {filtered[lightboxIndex].category}
                 </p>
                 <p className="font-serif text-lg text-white mt-1">

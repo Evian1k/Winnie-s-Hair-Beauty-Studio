@@ -28,10 +28,10 @@ export function isResendConfigured(): boolean {
 
 const DEFAULT_FROM =
   process.env.EMAIL_FROM ||
-  "Winnie's Hair & Beauty Studio <noreply@winnieshairandbeauty.co.ke>";
+  "Lizaya Hair Studio <noreply@lizayahairstudio.co.ke>";
 
 const SALON_INBOX =
-  process.env.EMAIL_TO_SALON || "hello@winnieshairandbeauty.co.ke";
+  process.env.EMAIL_TO_SALON || "hello@lizayahairstudio.co.ke";
 
 interface BookingEmailData {
   customerName: string;
@@ -68,7 +68,7 @@ export async function sendBookingConfirmation(data: BookingEmailData): Promise<b
         <div style="text-align: center; margin-bottom: 24px;">
           <div style="display: inline-block; width: 56px; height: 56px; border-radius: 50%; background: linear-gradient(135deg, #B76E79, #D4AF37); color: white; font-family: Georgia, serif; font-size: 28px; font-weight: bold; line-height: 56px; margin-bottom: 12px;">W</div>
           <h1 style="font-family: Georgia, serif; color: #1a1a1a; font-size: 24px; margin: 0;">Booking Confirmed</h1>
-          <p style="color: #888; margin: 4px 0 0 0; font-size: 14px;">Winnie's Hair &amp; Beauty Studio</p>
+          <p style="color: #888; margin: 4px 0 0 0; font-size: 14px;">Lizaya Hair Studio</p>
         </div>
         <p style="color: #444; font-size: 16px; line-height: 1.6;">Hi ${data.customerName},</p>
         <p style="color: #444; font-size: 16px; line-height: 1.6;">Your appointment is confirmed! We can't wait to pamper you. Here are your details:</p>

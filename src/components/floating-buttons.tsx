@@ -20,14 +20,12 @@ export function FloatingButtons() {
   });
 
   const whatsappUrl = `https://wa.me/${SALON_INFO.whatsapp}?text=${encodeURIComponent(
-    "Hello Winnie's Hair & Beauty Studio! I'd like to book an appointment."
+    "Hello Lizaya Hair Studio! I'd like to book an appointment."
   )}`;
 
   return (
     <>
-      {/* Floating action stack */}
       <div className="fixed bottom-5 right-4 sm:right-6 z-40 flex flex-col items-end gap-2.5 no-print">
-        {/* Back to top */}
         <AnimatePresence>
           {showTop && (
             <motion.button
@@ -35,7 +33,7 @@ export function FloatingButtons() {
               animate={{ opacity: 1, scale: 1 }}
               exit={{ opacity: 0, scale: 0.5 }}
               onClick={() => window.scrollTo({ top: 0, behavior: "smooth" })}
-              className="w-10 h-10 rounded-full glass shadow-luxe flex items-center justify-center text-foreground hover:text-[#B76E79] transition-colors focus-luxe"
+              className="w-10 h-10 rounded-full glass shadow-luxe flex items-center justify-center text-foreground hover:text-[#0F4C3A] transition-colors focus-luxe"
               aria-label="Back to top"
             >
               <ArrowUp className="h-4 w-4" />
@@ -43,19 +41,17 @@ export function FloatingButtons() {
           )}
         </AnimatePresence>
 
-        {/* Call */}
         <motion.a
           href={`tel:${SALON_INFO.phoneRaw}`}
           initial={{ opacity: 0, scale: 0.5 }}
           animate={{ opacity: 1, scale: 1 }}
           transition={{ delay: 0.1 }}
-          className="w-12 h-12 rounded-full bg-gradient-to-br from-[#D4AF37] to-[#B8862A] shadow-luxe flex items-center justify-center text-white hover:scale-110 transition-transform focus-luxe"
+          className="w-12 h-12 rounded-full bg-gradient-to-br from-[#C9A961] to-[#9A7B3F] shadow-luxe flex items-center justify-center text-white hover:scale-110 transition-transform focus-luxe"
           aria-label={`Call ${SALON_INFO.phone}`}
         >
           <Phone className="h-5 w-5" />
         </motion.a>
 
-        {/* WhatsApp */}
         <motion.a
           href={whatsappUrl}
           target="_blank"
@@ -70,7 +66,6 @@ export function FloatingButtons() {
           <span className="absolute inset-0 rounded-full bg-[#25D366] animate-ping opacity-20" />
         </motion.a>
 
-        {/* Online chat */}
         <motion.button
           onClick={() => setChatOpen(!chatOpen)}
           initial={{ opacity: 0, scale: 0.5 }}
@@ -78,9 +73,7 @@ export function FloatingButtons() {
           transition={{ delay: 0.2 }}
           className={cn(
             "w-12 h-12 rounded-full shadow-luxe flex items-center justify-center text-white transition-transform hover:scale-110 focus-luxe",
-            chatOpen
-              ? "bg-foreground"
-              : "bg-gradient-to-br from-[#B76E79] to-[#D4A574]"
+            chatOpen ? "bg-foreground" : "bg-gradient-to-br from-[#0F4C3A] to-[#1A6B52]"
           )}
           aria-label="Open live chat"
         >
@@ -88,7 +81,6 @@ export function FloatingButtons() {
         </motion.button>
       </div>
 
-      {/* Online chat widget */}
       <AnimatePresence>
         {chatOpen && <ChatWidget />}
       </AnimatePresence>
@@ -102,7 +94,7 @@ function ChatWidget() {
   const [messages, setMessages] = React.useState<{ from: "bot" | "user"; text: string }[]>([
     {
       from: "bot",
-      text: "Karibu! 👋 Welcome to Winnie's Hair & Beauty Studio. How can we help you today?",
+      text: "Karibu! 👋 Welcome to Lizaya Hair Studio. How can we help you today?",
     },
   ]);
   const [input, setInput] = React.useState("");
@@ -126,18 +118,19 @@ function ChatWidget() {
     setMessages((m) => [...m, { from: "user", text }]);
     setInput("");
 
-    // Simulated bot reply
     setTimeout(() => {
-      let reply = "Thank you for your message! Our team will get back to you shortly. For urgent matters, please call +254 790 573509.";
+      let reply = "Thank you for your message! Our team will get back to you shortly. For urgent matters, please call 0701 890354.";
       const lower = text.toLowerCase();
       if (lower.includes("book")) {
         reply = "Wonderful! You can book directly on our booking page — pick your service, date, time and stylist in under a minute. Shall I take you there?";
       } else if (lower.includes("price") || lower.includes("service")) {
-        reply = "Our services start from KSh 500 for eyebrows up to KSh 15,000 for premium packages. Visit our pricing page for full details.";
+        reply = "Our services start from KSh 300 for beard trims up to KSh 8,000 for our Spa Retreat Package. Visit our pricing page for full details.";
       } else if (lower.includes("where") || lower.includes("location") || lower.includes("located")) {
-        reply = "We're at Katani Lounge Building, Syokimau–Katani Road, Katani, Kenya. We're easy to find — just look for the pink signage!";
+        reply = "We're at Gateway Mall, Syokimau, in the EK Physiotherapy building near JKIA. Plus code: JWP6+6X Nairobi. Ample parking available!";
       } else if (lower.includes("hour") || lower.includes("open") || lower.includes("close")) {
-        reply = "We're open Mon–Fri 8AM–8PM, Sat 8AM–7PM, and Sun 10AM–5PM. We can't wait to see you!";
+        reply = "We're open Mon–Sat 8AM–9:30PM and Sun 10AM–8PM. We close late to fit your schedule — perfect for after-work appointments!";
+      } else if (lower.includes("barber") || lower.includes("shave") || lower.includes("fade")) {
+        reply = "Our barbershop is one of the best in Syokimau! Freddie specializes in skin fades, beard grooming, and hot towel shaves. Want to book a barber appointment?";
       }
       setMessages((m) => [...m, { from: "bot", text: reply }]);
     }, 800);
@@ -151,16 +144,16 @@ function ChatWidget() {
       transition={{ duration: 0.25, ease: [0.4, 0, 0.2, 1] }}
       className="fixed bottom-24 right-4 sm:right-6 z-40 w-[calc(100vw-2rem)] max-w-sm no-print"
     >
-      <div className="glass-pink rounded-3xl shadow-luxe-lg overflow-hidden flex flex-col max-h-[70vh]">
+      <div className="glass-emerald rounded-3xl shadow-luxe-lg overflow-hidden flex flex-col max-h-[70vh]">
         {/* Header */}
-        <div className="bg-gradient-to-r from-[#B76E79] to-[#D4A574] px-5 py-4 text-white">
+        <div className="bg-gradient-to-r from-[#0F4C3A] to-[#1A6B52] px-5 py-4 text-white">
           <div className="flex items-center justify-between">
             <div className="flex items-center gap-3">
               <div className="w-10 h-10 rounded-full bg-white/20 flex items-center justify-center font-serif font-bold">
-                W
+                L
               </div>
               <div>
-                <p className="font-serif text-base">Winnie's Concierge</p>
+                <p className="font-serif text-base">Lizaya Concierge</p>
                 <p className="text-xs opacity-80 flex items-center gap-1.5">
                   <span className="w-2 h-2 rounded-full bg-green-300 animate-pulse" />
                   Online now
@@ -180,18 +173,12 @@ function ChatWidget() {
         {/* Messages */}
         <div ref={scrollRef} className="flex-1 overflow-y-auto luxe-scroll p-4 space-y-3 bg-background/40 min-h-[200px] max-h-[40vh]">
           {messages.map((m, i) => (
-            <div
-              key={i}
-              className={cn(
-                "flex",
-                m.from === "user" ? "justify-end" : "justify-start"
-              )}
-            >
+            <div key={i} className={cn("flex", m.from === "user" ? "justify-end" : "justify-start")}>
               <div
                 className={cn(
                   "max-w-[80%] px-3.5 py-2.5 rounded-2xl text-sm",
                   m.from === "user"
-                    ? "bg-gradient-to-br from-[#B76E79] to-[#D4A574] text-white rounded-br-md"
+                    ? "bg-gradient-to-br from-[#0F4C3A] to-[#1A6B52] text-white rounded-br-md"
                     : "bg-white dark:bg-card shadow-sm text-foreground rounded-bl-md"
                 )}
               >
@@ -218,10 +205,7 @@ function ChatWidget() {
 
         {/* Input */}
         <form
-          onSubmit={(e) => {
-            e.preventDefault();
-            send(input);
-          }}
+          onSubmit={(e) => { e.preventDefault(); send(input); }}
           className="p-3 bg-background border-t border-border flex gap-2"
         >
           <Input
@@ -233,7 +217,7 @@ function ChatWidget() {
           <Button
             type="submit"
             size="icon"
-            className="rounded-full bg-gradient-to-br from-[#B76E79] to-[#D4A574] h-10 w-10 shrink-0"
+            className="rounded-full bg-gradient-to-br from-[#0F4C3A] to-[#1A6B52] h-10 w-10 shrink-0"
             aria-label="Send"
           >
             <Send className="h-4 w-4" />

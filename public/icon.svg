@@ -1,90 +1,59 @@
 <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 200 200" fill="none">
   <defs>
     <linearGradient id="bgGrad" x1="0%" y1="0%" x2="100%" y2="100%">
-      <stop offset="0%" stop-color="#B76E79"/>
-      <stop offset="45%" stop-color="#D4A574"/>
-      <stop offset="100%" stop-color="#D4AF37"/>
+      <stop offset="0%" stop-color="#0F4C3A"/>
+      <stop offset="60%" stop-color="#1A6B52"/>
+      <stop offset="100%" stop-color="#2A7D5F"/>
     </linearGradient>
-    <linearGradient id="goldShine" x1="0%" y1="0%" x2="0%" y2="100%">
-      <stop offset="0%" stop-color="#F4D77A"/>
-      <stop offset="50%" stop-color="#D4AF37"/>
-      <stop offset="100%" stop-color="#B8862A"/>
+    <linearGradient id="goldGrad" x1="0%" y1="0%" x2="100%" y2="100%">
+      <stop offset="0%" stop-color="#9A7B3F"/>
+      <stop offset="50%" stop-color="#C9A961"/>
+      <stop offset="100%" stop-color="#E5C885"/>
     </linearGradient>
-    <radialGradient id="roseGrad" cx="50%" cy="40%" r="60%">
-      <stop offset="0%" stop-color="#FFE8EC"/>
-      <stop offset="60%" stop-color="#F4B8C4"/>
-      <stop offset="100%" stop-color="#B76E79"/>
-    </radialGradient>
   </defs>
 
-  <!-- Outer gold disc -->
   <circle cx="100" cy="100" r="98" fill="url(#bgGrad)"/>
+  <circle cx="100" cy="100" r="92" fill="none" stroke="url(#goldGrad)" stroke-width="1" opacity="0.5"/>
+  <circle cx="100" cy="100" r="88" fill="none" stroke="#FFFFFF" stroke-width="0.4" opacity="0.2"/>
 
-  <!-- Inner ring border -->
-  <circle cx="100" cy="100" r="92" fill="none" stroke="#FFFFFF" stroke-width="0.6" opacity="0.35"/>
-  <circle cx="100" cy="100" r="88" fill="none" stroke="#FFFFFF" stroke-width="0.3" opacity="0.2"/>
+  <circle cx="100" cy="14" r="1.5" fill="#C9A961" opacity="0.8"/>
+  <circle cx="100" cy="186" r="1.5" fill="#C9A961" opacity="0.8"/>
+  <circle cx="14" cy="100" r="1.5" fill="#C9A961" opacity="0.8"/>
+  <circle cx="186" cy="100" r="1.5" fill="#C9A961" opacity="0.8"/>
 
-  <!-- Decorative compass dots -->
-  <circle cx="100" cy="10" r="1.5" fill="#FFFFFF" opacity="0.8"/>
-  <circle cx="100" cy="190" r="1.5" fill="#FFFFFF" opacity="0.8"/>
-  <circle cx="10" cy="100" r="1.5" fill="#FFFFFF" opacity="0.8"/>
-  <circle cx="190" cy="100" r="1.5" fill="#FFFFFF" opacity="0.8"/>
-
-  <!-- Laurel leaves - left -->
-  <g fill="#FFFFFF" opacity="0.55">
-    <path d="M 38 95 Q 32 88 34 80 Q 40 84 42 92 Q 44 96 38 95 Z"/>
-    <path d="M 36 108 Q 30 112 32 120 Q 38 118 40 110 Q 42 106 36 108 Z"/>
-    <path d="M 40 122 Q 36 128 40 134 Q 44 130 44 122 Q 44 118 40 122 Z"/>
-  </g>
-  <!-- Laurel leaves - right (mirrored) -->
-  <g fill="#FFFFFF" opacity="0.55" transform="translate(200, 0) scale(-1, 1)">
-    <path d="M 38 95 Q 32 88 34 80 Q 40 84 42 92 Q 44 96 38 95 Z"/>
-    <path d="M 36 108 Q 30 112 32 120 Q 38 118 40 110 Q 42 106 36 108 Z"/>
-    <path d="M 40 122 Q 36 128 40 134 Q 44 130 44 122 Q 44 118 40 122 Z"/>
+  <!-- Scissors at top -->
+  <g transform="translate(100, 52)" stroke="url(#goldGrad)" stroke-width="2.2" fill="none" stroke-linecap="round" stroke-linejoin="round">
+    <circle cx="-8" cy="-4" r="5"/>
+    <circle cx="8" cy="-4" r="5"/>
+    <line x1="-4" y1="1" x2="6" y2="13"/>
+    <line x1="4" y1="1" x2="-6" y2="13"/>
   </g>
 
-  <!-- Rose accent at top -->
-  <g transform="translate(100, 48)">
-    <!-- Outer petals -->
-    <ellipse cx="-6" cy="-2" rx="5" ry="7" fill="url(#roseGrad)" opacity="0.85" transform="rotate(-35)"/>
-    <ellipse cx="6" cy="-2" rx="5" ry="7" fill="url(#roseGrad)" opacity="0.85" transform="rotate(35)"/>
-    <ellipse cx="0" cy="-6" rx="5" ry="6" fill="url(#roseGrad)" opacity="0.95"/>
-    <!-- Inner petals -->
-    <ellipse cx="-3" cy="0" rx="3" ry="4" fill="#FFFFFF" opacity="0.4" transform="rotate(-20)"/>
-    <ellipse cx="3" cy="0" rx="3" ry="4" fill="#FFFFFF" opacity="0.4" transform="rotate(20)"/>
-    <!-- Center -->
-    <circle cx="0" cy="0" r="2.2" fill="url(#goldShine)"/>
-    <circle cx="0" cy="-0.5" r="1" fill="#FFFFFF" opacity="0.7"/>
-  </g>
-
-  <!-- W monogram - elegant serif -->
+  <!-- L monogram -->
   <text x="100" y="128" text-anchor="middle"
-        font-family="Georgia, 'Times New Roman', serif"
-        font-size="72"
-        font-weight="bold"
-        fill="#FFFFFF"
-        letter-spacing="-2">W</text>
+        font-family="Cormorant Garamond, Georgia, serif"
+        font-size="76"
+        font-weight="600"
+        fill="url(#goldGrad)">L</text>
 
-  <!-- Ornamental divider -->
-  <g transform="translate(100, 148)">
-    <line x1="-22" y1="0" x2="-5" y2="0" stroke="#FFFFFF" stroke-width="0.5" opacity="0.7"/>
-    <circle cx="0" cy="0" r="1.2" fill="#FFFFFF" opacity="0.9"/>
-    <line x1="5" y1="0" x2="22" y2="0" stroke="#FFFFFF" stroke-width="0.5" opacity="0.7"/>
+  <!-- Divider -->
+  <g transform="translate(100, 152)">
+    <line x1="-26" y1="0" x2="-6" y2="0" stroke="url(#goldGrad)" stroke-width="0.8" opacity="0.7"/>
+    <circle cx="0" cy="0" r="1.5" fill="#C9A961" opacity="0.9"/>
+    <line x1="6" y1="0" x2="26" y2="0" stroke="url(#goldGrad)" stroke-width="0.8" opacity="0.7"/>
   </g>
 
-  <!-- EST. 2019 -->
-  <text x="100" y="166" text-anchor="middle"
-        font-family="Georgia, serif"
-        font-size="7.5"
-        letter-spacing="3.5"
-        fill="#FFFFFF"
-        opacity="0.85">EST. 2019</text>
+  <text x="100" y="172" text-anchor="middle"
+        font-family="Cormorant SC, Georgia, serif"
+        font-size="9"
+        letter-spacing="3"
+        fill="#C9A961"
+        opacity="0.85">EST. 2014</text>
 
-  <!-- Tiny KENYA tag -->
-  <text x="100" y="178" text-anchor="middle"
-        font-family="Georgia, serif"
-        font-size="5.5"
+  <text x="100" y="184" text-anchor="middle"
+        font-family="Cormorant SC, Georgia, serif"
+        font-size="6"
         letter-spacing="2"
         fill="#FFFFFF"
-        opacity="0.6">KATANI · KENYA</text>
+        opacity="0.5">SYOKIMAU · KENYA</text>
 </svg>

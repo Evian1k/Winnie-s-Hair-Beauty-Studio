@@ -11,7 +11,7 @@ export const runtime = "nodejs";
 export async function POST(req: NextRequest) {
   try {
     const { password } = await req.json();
-    const ADMIN_PASSWORD = process.env.ADMIN_PASSWORD || "winnie2024";
+    const ADMIN_PASSWORD = process.env.ADMIN_PASSWORD || "lizaya2024";
 
     if (password !== ADMIN_PASSWORD) {
       return NextResponse.json({ error: "Invalid password" }, { status: 401 });

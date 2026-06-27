@@ -30,7 +30,7 @@ export function PricingView() {
         eyebrow="Pricing"
         title={
           <>
-            Transparent rates, <span className="text-gradient-rose">no surprises</span>
+            Transparent rates, <span className="text-gradient-emerald">no surprises</span>
           </>
         }
         subtitle="Premium service at fair prices. Browse à la carte services and curated packages below."
@@ -48,13 +48,13 @@ export function PricingView() {
                 whileInView={{ opacity: 1, y: 0 }}
                 viewport={{ once: true, margin: "-60px" }}
                 transition={{ duration: 0.5, delay: i * 0.1 }}
-                className="relative p-5 rounded-2xl bg-gradient-to-br from-[#B76E79]/10 to-[#D4AF37]/10 border border-[#B76E79]/20"
+                className="relative p-5 rounded-2xl bg-gradient-to-br from-[#0F4C3A]/10 to-[#C9A961]/10 border border-[#0F4C3A]/20"
               >
-                <Sparkles className="h-5 w-5 text-[#B76E79] mb-2" />
+                <Sparkles className="h-5 w-5 text-[#0F4C3A] mb-2" />
                 <h4 className="font-serif text-base font-semibold mb-1">{offer.title}</h4>
                 <p className="text-xs text-muted-foreground leading-relaxed mb-3">{offer.description}</p>
                 <div className="flex items-center justify-between">
-                  <code className="text-xs px-2 py-1 rounded bg-background font-mono text-[#B76E79]">{offer.code}</code>
+                  <code className="text-xs px-2 py-1 rounded bg-background font-mono text-[#0F4C3A]">{offer.code}</code>
                   <span className="text-[10px] text-muted-foreground">{offer.expires}</span>
                 </div>
               </motion.div>
@@ -99,7 +99,7 @@ export function PricingView() {
                         <div className="flex items-start justify-between mb-2">
                           <h4 className="font-serif text-base font-semibold pr-3">{service.name}</h4>
                           {service.popular && (
-                            <span className="shrink-0 text-[9px] uppercase tracking-wider px-2 py-0.5 rounded-full bg-gradient-to-r from-[#B76E79] to-[#D4A574] text-white">
+                            <span className="shrink-0 text-[9px] uppercase tracking-wider px-2 py-0.5 rounded-full bg-gradient-to-r from-[#0F4C3A] to-[#1A6B52] text-white">
                               Popular
                             </span>
                           )}
@@ -110,7 +110,7 @@ export function PricingView() {
                         <div className="flex items-center justify-between pt-3 border-t border-border">
                           <div>
                             <p className="text-[10px] uppercase tracking-widest text-muted-foreground">From</p>
-                            <p className="font-serif text-base font-bold text-gradient-rose">
+                            <p className="font-serif text-base font-bold text-gradient-emerald">
                               KSh {service.startingPrice.toLocaleString()}
                             </p>
                           </div>
@@ -118,7 +118,7 @@ export function PricingView() {
                             onClick={() => handleBook(service.id)}
                             size="sm"
                             variant="outline"
-                            className="rounded-full border-[#B76E79]/30 hover:bg-[#B76E79]/5 h-8 px-3"
+                            className="rounded-full border-[#0F4C3A]/30 hover:bg-[#0F4C3A]/5 h-8 px-3"
                           >
                             Book
                           </Button>
@@ -140,7 +140,7 @@ export function PricingView() {
             eyebrow="Packages"
             title={
               <>
-                Curated <span className="text-gradient-rose">experiences</span>
+                Curated <span className="text-gradient-emerald">experiences</span>
               </>
             }
             subtitle="Save up to 20% when you bundle services into a package. Perfect for bridal, events, and self-care days."
@@ -163,7 +163,7 @@ export function PricingView() {
                 )}
               >
                 {pkg.popular && (
-                  <div className="absolute -top-3 left-1/2 -translate-x-1/2 px-3 py-1 rounded-full bg-gradient-to-r from-[#B76E79] to-[#D4A574] text-white text-[10px] uppercase tracking-wider font-medium flex items-center gap-1">
+                  <div className="absolute -top-3 left-1/2 -translate-x-1/2 px-3 py-1 rounded-full bg-gradient-to-r from-[#0F4C3A] to-[#1A6B52] text-white text-[10px] uppercase tracking-wider font-medium flex items-center gap-1">
                     <Crown className="h-3 w-3" />
                     Most Popular
                   </div>
@@ -171,7 +171,7 @@ export function PricingView() {
                 <h3 className="font-serif text-xl font-semibold mb-1">{pkg.name}</h3>
                 <p className="text-xs text-muted-foreground mb-4 leading-relaxed">{pkg.description}</p>
                 <div className="mb-4">
-                  <p className="font-serif text-3xl font-bold text-gradient-rose">
+                  <p className="font-serif text-3xl font-bold text-gradient-emerald">
                     KSh {pkg.price.toLocaleString()}
                   </p>
                   <p className="text-xs text-muted-foreground mt-1">{pkg.duration}</p>
@@ -179,7 +179,7 @@ export function PricingView() {
                 <ul className="space-y-2 mb-6 flex-1">
                   {pkg.includes.map((item) => (
                     <li key={item} className="flex items-start gap-2 text-xs text-foreground/80">
-                      <Check className="h-3.5 w-3.5 text-[#D4AF37] mt-0.5 shrink-0" />
+                      <Check className="h-3.5 w-3.5 text-[#C9A961] mt-0.5 shrink-0" />
                       <span>{item}</span>
                     </li>
                   ))}
@@ -189,7 +189,7 @@ export function PricingView() {
                   className={cn(
                     "w-full rounded-full",
                     pkg.popular
-                      ? "bg-gradient-to-r from-[#B76E79] to-[#D4A574] hover:opacity-90 text-white"
+                      ? "bg-gradient-to-r from-[#0F4C3A] to-[#1A6B52] hover:opacity-90 text-white"
                       : "bg-foreground text-background hover:opacity-90"
                   )}
                 >
@@ -209,23 +209,23 @@ export function PricingView() {
             <h4 className="font-serif text-lg font-semibold mb-4 text-center">Good to know</h4>
             <ul className="space-y-2 text-sm text-muted-foreground">
               <li className="flex items-start gap-2">
-                <Check className="h-4 w-4 text-[#D4AF37] mt-0.5 shrink-0" />
+                <Check className="h-4 w-4 text-[#C9A961] mt-0.5 shrink-0" />
                 All prices include products used during the service.
               </li>
               <li className="flex items-start gap-2">
-                <Check className="h-4 w-4 text-[#D4AF37] mt-0.5 shrink-0" />
+                <Check className="h-4 w-4 text-[#C9A961] mt-0.5 shrink-0" />
                 Premium add-ons (e.g. hair extensions) are quoted separately and agreed beforehand.
               </li>
               <li className="flex items-start gap-2">
-                <Check className="h-4 w-4 text-[#D4AF37] mt-0.5 shrink-0" />
+                <Check className="h-4 w-4 text-[#C9A961] mt-0.5 shrink-0" />
                 We accept M-Pesa, cash, and all major cards.
               </li>
               <li className="flex items-start gap-2">
-                <Check className="h-4 w-4 text-[#D4AF37] mt-0.5 shrink-0" />
+                <Check className="h-4 w-4 text-[#C9A961] mt-0.5 shrink-0" />
                 Bridal packages require a 50% deposit to secure the date.
               </li>
               <li className="flex items-start gap-2">
-                <Check className="h-4 w-4 text-[#D4AF37] mt-0.5 shrink-0" />
+                <Check className="h-4 w-4 text-[#C9A961] mt-0.5 shrink-0" />
                 Loyalty members enjoy 15% off all additional services.
               </li>
             </ul>

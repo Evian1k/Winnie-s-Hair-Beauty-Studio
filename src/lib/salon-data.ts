@@ -1,128 +1,237 @@
-// Centralized salon data — easily editable by owner.
-// In production this would be served from Supabase/Prisma; for now we keep it in
-// a typed module so the admin dashboard can mutate via Zustand + localStorage.
+// Lizaya Hair Studio — centralized salon data.
+// Easily editable by owner. In production this would be served from Supabase/Prisma.
 
 const env = (typeof process !== "undefined" ? process.env : {}) as Record<string, string | undefined>;
 
 export const SALON_INFO = {
-  name: "Winnie's Hair & Beauty Studio",
-  shortName: "Winnie's",
-  tagline: "Where Beauty Meets Artistry",
+  name: "Lizaya Hair Studio",
+  shortName: "Lizaya",
+  tagline: "Salon · SPA · Barbershop",
   description:
-    "A luxury hair, nails, and beauty sanctuary in the heart of Katani. We blend world-class technique with warm Kenyan hospitality to make every visit feel like a celebration of you.",
-  phone: "+254 790 573509",
-  phoneRaw: "+254790573509",
-  whatsapp: env.NEXT_PUBLIC_WHATSAPP_NUMBER || "254790573509",
-  email: "hello@winnieshairandbeauty.co.ke",
+    "At Lizaya Hair Studio, we bring together hair artistry, barbering precision, spa tranquillity, and nail perfection under one roof — at Gateway Mall, Syokimau. Our multi-talented team treats every client like family.",
+  phone: "0701 890354",
+  phoneRaw: "+254701890354",
+  whatsapp: "254701890354",
+  email: "hello@lizayahairstudio.co.ke",
   address: {
-    line1: "Katani Lounge Building",
-    line2: "Syokimau–Katani Road",
-    city: "Katani",
+    line1: "Gateway Mall, Syokimau",
+    line2: "EK Physiotherapy Building, near JKIA",
+    city: "Syokimau",
     region: "Machakos County",
     country: "Kenya",
+    plusCode: "JWP6+6X Nairobi",
   },
   mapEmbed:
-    env.NEXT_PUBLIC_GOOGLE_MAPS_EMBED ||
-    "https://www.google.com/maps?q=Katani+Lounge+Building+Syokimau+Katani+Road+Katani+Kenya&output=embed",
-  mapLink: "https://www.google.com/maps/search/?api=1&query=Katani+Lounge+Building+Syokimau+Katani+Road+Katani+Kenya",
-  rating: 5.0,
-  reviewCount: 127,
+    "https://www.google.com/maps?q=Gateway+Mall+Syokimau+Lizaya+Hair+Studio&output=embed",
+  mapLink: "https://www.google.com/maps/search/?api=1&query=Gateway+Mall+Syokimau+Lizaya+Hair+Studio",
+  rating: 4.1,
+  reviewCount: 166,
   hours: [
-    { day: "Monday", open: "08:00", close: "20:00", closed: false },
-    { day: "Tuesday", open: "08:00", close: "20:00", closed: false },
-    { day: "Wednesday", open: "08:00", close: "20:00", closed: false },
-    { day: "Thursday", open: "08:00", close: "20:00", closed: false },
-    { day: "Friday", open: "08:00", close: "20:00", closed: false },
-    { day: "Saturday", open: "08:00", close: "19:00", closed: false },
-    { day: "Sunday", open: "10:00", close: "17:00", closed: false },
+    { day: "Monday", open: "08:00", close: "21:30", closed: false },
+    { day: "Tuesday", open: "08:00", close: "21:30", closed: false },
+    { day: "Wednesday", open: "08:00", close: "21:30", closed: false },
+    { day: "Thursday", open: "08:00", close: "21:30", closed: false },
+    { day: "Friday", open: "08:00", close: "21:30", closed: false },
+    { day: "Saturday", open: "08:00", close: "21:30", closed: false },
+    { day: "Sunday", open: "10:00", close: "20:00", closed: false },
   ],
   social: {
-    instagram: env.NEXT_PUBLIC_INSTAGRAM_URL || "https://instagram.com/winnieshairandbeauty",
-    tiktok: env.NEXT_PUBLIC_TIKTOK_URL || "https://tiktok.com/@winnieshairandbeauty",
-    facebook: env.NEXT_PUBLIC_FACEBOOK_URL || "https://facebook.com/winnieshairandbeauty",
+    instagram: env.NEXT_PUBLIC_INSTAGRAM_URL || "https://instagram.com/lizayahairstudio",
+    tiktok: env.NEXT_PUBLIC_TIKTOK_URL || "https://tiktok.com/@lizayahairstudio",
+    facebook: env.NEXT_PUBLIC_FACEBOOK_URL || "https://facebook.com/lizayahairstudio",
   },
-  founded: 2019,
-  siteUrl: env.NEXT_PUBLIC_SITE_URL || "https://winnieshairandbeauty.co.ke",
+  siteUrl: env.NEXT_PUBLIC_SITE_URL || "https://lizayahairstudio.co.ke",
+  founded: 2014,
+  location: "Gateway Mall, Syokimau",
 };
 
-export type ServiceCategory = "hair" | "nails" | "beauty";
+export type ServiceCategory = "hair" | "barber" | "spa" | "nails";
 
 export interface Service {
   id: string;
   category: ServiceCategory;
   name: string;
   description: string;
-  startingPrice: number; // KSh
+  startingPrice: number;
   duration: string;
   image: string;
   popular?: boolean;
 }
 
 export const SERVICES: Service[] = [
-  // ===== HAIR =====
+  // ===== HAIR (Women) =====
   {
     id: "hair-styling",
     category: "hair",
     name: "Hair Styling",
     description:
-      "From sleek blow-dries to red-carpet updos, our stylists craft looks that turn heads. We work with your face shape, hair texture, and personal style to deliver a finish that lasts.",
-    startingPrice: 1500,
+      "From sleek blow-dries to elegant updos, our stylists craft looks that complement your features and lifestyle. We work with all hair textures and lengths.",
+    startingPrice: 1200,
     duration: "60 min",
-    image: "https://sfile.chatglm.cn/images-ppt/74ac5010ae4a.jpg",
+    image: "https://sfile.chatglm.cn/images-ppt/e6bdb0ac0855.jpg",
     popular: true,
-  },
-  {
-    id: "hair-treatment",
-    category: "hair",
-    name: "Hair Treatment",
-    description:
-      "Deep conditioning, keratin, and protein treatments designed to restore shine, strength, and elasticity. Ideal for chemically-treated or heat-damaged hair.",
-    startingPrice: 2500,
-    duration: "90 min",
-    image: "https://sfile.chatglm.cn/images-ppt/44a43fcb3aa2.jpg",
-  },
-  {
-    id: "braiding",
-    category: "hair",
-    name: "Braiding",
-    description:
-      "Box braids, knotless braids, cornrows, twists, and Fulani styles — done with premium fibre and a light hand for a finish that protects your edges and lasts weeks.",
-    startingPrice: 3000,
-    duration: "3–6 hrs",
-    image: "https://sfile.chatglm.cn/images-ppt/1cdec30d3ac9.jpg",
-    popular: true,
-  },
-  {
-    id: "natural-hair",
-    category: "hair",
-    name: "Natural Hair",
-    description:
-      "Twist-outs, braid-outs, Bantu knots, and wash-and-gos tailored to your curl pattern. We celebrate and nourish your natural crown.",
-    startingPrice: 2000,
-    duration: "75 min",
-    image: "https://sfile.chatglm.cn/images-ppt/ec6648e539c4.webp",
   },
   {
     id: "hair-coloring",
     category: "hair",
     name: "Hair Coloring",
     description:
-      "Global colour, balayage, ombré, highlights, and fashion tones using premium ammonia-free brands. Custom formulated for your skin tone and lifestyle.",
-    startingPrice: 4500,
+      "Global colour, balayage, ombré, and highlights using premium ammonia-free brands. Custom-mixed for your skin tone and desired finish.",
+    startingPrice: 3500,
     duration: "2–4 hrs",
-    image: "https://sfile.chatglm.cn/images-ppt/6655e75c93bc.jpg",
+    image: "https://sfile.chatglm.cn/images-ppt/a2d7fff25cc0.jpg",
     popular: true,
+  },
+  {
+    id: "braiding",
+    category: "hair",
+    name: "Braiding",
+    description:
+      "Box braids, knotless braids, cornrows, twists, and Fulani styles. Done with premium fibre and a gentle hand for a protective, long-lasting finish.",
+    startingPrice: 2500,
+    duration: "3–6 hrs",
+    image: "https://sfile.chatglm.cn/images-ppt/ecbe61b16c10.jpg",
+  },
+  {
+    id: "hair-treatment",
+    category: "hair",
+    name: "Hair Treatment",
+    description:
+      "Deep conditioning, keratin, and protein treatments to restore shine, strength, and elasticity. Ideal for chemically-treated or heat-damaged hair.",
+    startingPrice: 2000,
+    duration: "90 min",
+    image: "https://sfile.chatglm.cn/images-ppt/d256dbbeaff3.jpg",
+  },
+  {
+    id: "natural-hair",
+    category: "hair",
+    name: "Natural Hair Care",
+    description:
+      "Twist-outs, braid-outs, Bantu knots, and wash-and-gos tailored to your curl pattern. We celebrate and nourish your natural crown.",
+    startingPrice: 1500,
+    duration: "75 min",
+    image: "https://sfile.chatglm.cn/images-ppt/b7e66e3271bf.jpg",
   },
   {
     id: "hair-wash",
     category: "hair",
-    name: "Hair Wash & Blow Dry",
+    name: "Wash & Blow Dry",
     description:
       "A luxurious shampoo, scalp massage, and blow-dry finish. The perfect mid-week refresher or pre-event glow-up.",
-    startingPrice: 800,
+    startingPrice: 700,
     duration: "45 min",
-    image: "https://sfile.chatglm.cn/images-ppt/7ed4a1aba38a.jpg",
+    image: "https://sfile.chatglm.cn/images-ppt/338651ac1995.jpg",
   },
+
+  // ===== BARBERSHOP (Men) =====
+  {
+    id: "mens-cut",
+    category: "barber",
+    name: "Men's Haircut",
+    description:
+      "Precision cuts, skin fades, tapers, and classic styles tailored to your face shape. Finished with a clean lineup and styling.",
+    startingPrice: 500,
+    duration: "45 min",
+    image: "https://sfile.chatglm.cn/images-ppt/a11effd4f0e9.jpg",
+    popular: true,
+  },
+  {
+    id: "beard-grooming",
+    category: "barber",
+    name: "Beard Trim & Shape",
+    description:
+      "Beard sculpting, trimming, and conditioning. We shape your beard to complement your face and finish with beard oil for a polished look.",
+    startingPrice: 300,
+    duration: "30 min",
+    image: "https://sfile.chatglm.cn/images-ppt/623063f5fad4.jpg",
+    popular: true,
+  },
+  {
+    id: "hot-towel-shave",
+    category: "barber",
+    name: "Hot Towel Shave",
+    description:
+      "A traditional straight-razor shave with hot towels, pre-shave oil, and after-shave balm. The ultimate grooming ritual.",
+    startingPrice: 600,
+    duration: "45 min",
+    image: "https://sfile.chatglm.cn/images-ppt/07ffed731941.jpg",
+  },
+  {
+    id: "fade",
+    category: "barber",
+    name: "Skin Fade",
+    description:
+      "Bald, low, mid, or high fades — blended seamlessly into your chosen length on top. Our barbers deliver crisp, clean lines every time.",
+    startingPrice: 600,
+    duration: "50 min",
+    image: "https://sfile.chatglm.cn/images-ppt/d2ae10fe40f4.jpg",
+    popular: true,
+  },
+  {
+    id: "kids-cut",
+    category: "barber",
+    name: "Kids' Haircut",
+    description:
+      "Patient, friendly cuts for children under 12. We make the chair fun and send them home looking sharp.",
+    startingPrice: 350,
+    duration: "30 min",
+    image: "https://sfile.chatglm.cn/images-ppt/8d1496d23b97.jpeg",
+  },
+  {
+    id: "barber-package",
+    category: "barber",
+    name: "Gentleman's Package",
+    description:
+      "Haircut, beard trim, hot towel shave, and facial cleansing — the complete grooming experience in one sit.",
+    startingPrice: 1500,
+    duration: "90 min",
+    image: "https://sfile.chatglm.cn/images-ppt/0a96904c1d1d.jpg",
+  },
+
+  // ===== SPA =====
+  {
+    id: "massage",
+    category: "spa",
+    name: "Massage Therapy",
+    description:
+      "Swedish, deep tissue, and aromatherapy massage to melt away tension. Choose 30, 60, or 90 minutes of pure relaxation.",
+    startingPrice: 2500,
+    duration: "60 min",
+    image: "https://sfile.chatglm.cn/images-ppt/9d1807b23c78.jpg",
+    popular: true,
+  },
+  {
+    id: "facial",
+    category: "spa",
+    name: "Facial Treatment",
+    description:
+      "Deep-cleansing, hydrating, brightening, and anti-ageing facials using premium skincare. Skin that glows from within.",
+    startingPrice: 2000,
+    duration: "75 min",
+    image: "https://sfile.chatglm.cn/images-ppt/07556261e148.jpg",
+    popular: true,
+  },
+  {
+    id: "body-scrub",
+    category: "spa",
+    name: "Body Scrub & Polish",
+    description:
+      "Full-body exfoliation with sea salt, sugar, or coffee scrub to remove dead skin and reveal soft, glowing skin underneath.",
+    startingPrice: 3000,
+    duration: "75 min",
+    image: "https://sfile.chatglm.cn/images-ppt/8d3e16344557.jpg",
+  },
+  {
+    id: "spa-package",
+    category: "spa",
+    name: "Spa Retreat Package",
+    description:
+      "60-min massage + facial + body scrub + complimentary tea. The ultimate escape from the city — over 3 hours of pure indulgence.",
+    startingPrice: 8000,
+    duration: "3+ hrs",
+    image: "https://sfile.chatglm.cn/images-ppt/aba8ca916eba.jpg",
+  },
+
   // ===== NAILS =====
   {
     id: "manicure",
@@ -130,9 +239,9 @@ export const SERVICES: Service[] = [
     name: "Manicure",
     description:
       "Classic, spa, or luxury manicure with cuticle care, exfoliation, mask, and polish. Your hands will look and feel renewed.",
-    startingPrice: 1200,
+    startingPrice: 1000,
     duration: "45 min",
-    image: "https://sfile.chatglm.cn/images-ppt/b2dc2e1dafda.jpg",
+    image: "https://sfile.chatglm.cn/images-ppt/da5149414cf2.jpg",
     popular: true,
   },
   {
@@ -141,127 +250,63 @@ export const SERVICES: Service[] = [
     name: "Pedicure",
     description:
       "Spa pedicure with soak, scrub, callus removal, mask, and massage. Walk out on cloud-soft feet.",
-    startingPrice: 1500,
+    startingPrice: 1200,
     duration: "60 min",
-    image: "https://sfile.chatglm.cn/images-ppt/006b28763775.jpg",
+    image: "https://sfile.chatglm.cn/images-ppt/7ee1857bd0a1.jpg",
   },
   {
     id: "gel-polish",
     category: "nails",
     name: "Gel Polish",
     description:
-      "Long-lasting, high-shine gel polish that holds for up to three weeks. Choose from over 200 designer shades.",
-    startingPrice: 1800,
+      "Long-lasting, high-shine gel polish that holds for up to three weeks. Over 200 designer shades to choose from.",
+    startingPrice: 1500,
     duration: "60 min",
-    image: "https://sfile.chatglm.cn/images-ppt/13d3a950c249.jpg",
+    image: "https://sfile.chatglm.cn/images-ppt/bd8f2a7a3c4b.jpg",
     popular: true,
   },
   {
     id: "acrylic",
     category: "nails",
-    name: "Acrylic & Extensions",
+    name: "Acrylic & Nail Art",
     description:
-      "Sculpted acrylics, press-ons, and bespoke nail art. From minimalist chic to elaborate designs — your nails, your story.",
-    startingPrice: 2500,
-    duration: "90 min",
-    image: "https://sfile.chatglm.cn/images-ppt/bc0fc36754b1.jpg",
-  },
-  // ===== BEAUTY =====
-  {
-    id: "makeup",
-    category: "beauty",
-    name: "Makeup",
-    description:
-      "Bridal, evening, editorial, and everyday glam. We use HD and long-wear formulas for a flawless finish that photographs beautifully.",
-    startingPrice: 3500,
-    duration: "75 min",
-    image: "https://sfile.chatglm.cn/images-ppt/04784dfeae4d.jpg",
-    popular: true,
-  },
-  {
-    id: "eyebrows",
-    category: "beauty",
-    name: "Eyebrows",
-    description:
-      "Shaping, threading, tinting, and microblading. Perfectly framed arches tailored to your face.",
-    startingPrice: 500,
-    duration: "30 min",
-    image: "https://sfile.chatglm.cn/images-ppt/eebb3f44105e.jpg",
-  },
-  {
-    id: "eyelashes",
-    category: "beauty",
-    name: "Eyelashes",
-    description:
-      "Classic, volume, hybrid, and mega-volume extensions. Wispy, dramatic, or natural — lash maps designed for your eye shape.",
+      "Sculpted acrylics, extensions, and bespoke nail art. From minimalist chic to elaborate designs — your nails, your story.",
     startingPrice: 2000,
     duration: "90 min",
-    image: "https://sfile.chatglm.cn/images-ppt/2c284b29b962.jpg",
-    popular: true,
-  },
-  {
-    id: "facials",
-    category: "beauty",
-    name: "Facials",
-    description:
-      "Deep-cleansing, hydrating, anti-ageing, and brightening facials using premium skincare. Skin that glows from within.",
-    startingPrice: 2500,
-    duration: "75 min",
-    image: "https://sfile.chatglm.cn/images-ppt/7eefed5d5d7d.jpg",
-    popular: true,
-  },
-  {
-    id: "waxing",
-    category: "beauty",
-    name: "Waxing",
-    description:
-      "Soft and hard wax for face, underarms, legs, bikini, and full body. Quick, hygienic, and as gentle as possible.",
-    startingPrice: 600,
-    duration: "20–60 min",
-    image: "https://sfile.chatglm.cn/images-ppt/a861d31ab00d.jpg",
-  },
-  {
-    id: "massage",
-    category: "beauty",
-    name: "Massage Therapy",
-    description:
-      "Swedish, deep-tissue, and aromatherapy massage. Melt away tension and leave feeling reborn. Optional add-on to any package.",
-    startingPrice: 3000,
-    duration: "60 min",
-    image: "https://sfile.chatglm.cn/images-ppt/9c150cff485c.jpg",
+    image: "https://sfile.chatglm.cn/images-ppt/822456b454ff.png",
   },
 ];
 
 export interface PortfolioItem {
   id: string;
   title: string;
-  category: "hair" | "nails" | "makeup" | "facials";
+  category: "hair" | "barber" | "spa" | "nails";
   image: string;
   description: string;
   featured?: boolean;
 }
 
 export const PORTFOLIO: PortfolioItem[] = [
-  { id: "p1", title: "Sleek Bob", category: "hair", image: "https://sfile.chatglm.cn/images-ppt/74ac5010ae4a.jpg", description: "Precision cut with a glossy finish", featured: true },
-  { id: "p2", title: "Knotless Braids", category: "hair", image: "https://sfile.chatglm.cn/images-ppt/1cdec30d3ac9.jpg", description: "Waist-length knotless braids with curls", featured: true },
-  { id: "p3", title: "Balayage Glow", category: "hair", image: "https://sfile.chatglm.cn/images-ppt/6655e75c93bc.jpg", description: "Sun-kissed balayage on natural hair", featured: true },
-  { id: "p4", title: "Soft Curls", category: "hair", image: "https://sfile.chatglm.cn/images-ppt/44a43fcb3aa2.jpg", description: "Voluminous curl definition" },
-  { id: "p5", title: "Natural Crown", category: "hair", image: "https://sfile.chatglm.cn/images-ppt/ec6648e539c4.webp", description: "Defined twist-out on natural hair" },
-  { id: "p6", title: "Salon Blowout", category: "hair", image: "https://sfile.chatglm.cn/images-ppt/7ed4a1aba38a.jpg", description: "Bouncy salon blowout" },
-  { id: "p7", title: "Rose Quartz Nails", category: "nails", image: "https://sfile.chatglm.cn/images-ppt/b2dc2e1dafda.jpg", description: "Pink rose quartz inspired manicure", featured: true },
-  { id: "p8", title: "Spa Pedicure", category: "nails", image: "https://sfile.chatglm.cn/images-ppt/006b28763775.jpg", description: "Pristine spa pedicure finish" },
-  { id: "p9", title: "Glossy Gel", category: "nails", image: "https://sfile.chatglm.cn/images-ppt/13d3a950c249.jpg", description: "High-shine nude gel polish" },
-  { id: "p10", title: "Acrylic Art", category: "nails", image: "https://sfile.chatglm.cn/images-ppt/bc0fc36754b1.jpg", description: "Custom acrylic with chrome details", featured: true },
-  { id: "p11", title: "Nude Set", category: "nails", image: "https://sfile.chatglm.cn/images-ppt/5c9ad7358a16.jpg", description: "Elegant nude almond nails" },
-  { id: "p12", title: "Bridal Glam", category: "makeup", image: "https://sfile.chatglm.cn/images-ppt/04784dfeae4d.jpg", description: "Soft bridal makeup with dewy finish", featured: true },
-  { id: "p13", title: "Evening Smokey", category: "makeup", image: "https://sfile.chatglm.cn/images-ppt/eebb3f44105e.jpg", description: "Sultry smokey eye for evening events" },
-  { id: "p14", title: "Lash Extensions", category: "makeup", image: "https://sfile.chatglm.cn/images-ppt/2c284b29b962.jpg", description: "Volume lash set, natural mapping" },
-  { id: "p15", title: "Bold Liner", category: "makeup", image: "https://sfile.chatglm.cn/images-ppt/04784dfeae4d.jpg", description: "Graphic liner editorial look" },
-  { id: "p16", title: "Glow Makeup", category: "makeup", image: "https://sfile.chatglm.cn/images-ppt/04784dfeae4d.jpg", description: "Bronzed glow with bold lips" },
-  { id: "p17", title: "Hydrating Facial", category: "facials", image: "https://sfile.chatglm.cn/images-ppt/7eefed5d5d7d.jpg", description: "Deep hydration facial results", featured: true },
-  { id: "p18", title: "Spa Glow", category: "facials", image: "https://sfile.chatglm.cn/images-ppt/299e93bd86bb.jpg", description: "Post-treatment radiant skin" },
-  { id: "p19", title: "Brightening", category: "facials", image: "https://sfile.chatglm.cn/images-ppt/a861d31ab00d.jpg", description: "Vitamin C brightening facial" },
-  { id: "p20", title: "Relaxing Massage", category: "facials", image: "https://sfile.chatglm.cn/images-ppt/9c150cff485c.jpg", description: "Aromatherapy back massage" },
+  { id: "p1", title: "Precision Fade", category: "barber", image: "https://sfile.chatglm.cn/images-ppt/a11effd4f0e9.jpg", description: "Clean skin fade with textured top", featured: true },
+  { id: "p2", title: "Beard Sculpt", category: "barber", image: "https://sfile.chatglm.cn/images-ppt/623063f5fad4.jpg", description: "Perfectly shaped beard with oil finish", featured: true },
+  { id: "p3", title: "Hot Towel Shave", category: "barber", image: "https://sfile.chatglm.cn/images-ppt/07ffed731941.jpg", description: "Traditional straight-razor shave" },
+  { id: "p4", title: "Kids' Cut", category: "barber", image: "https://sfile.chatglm.cn/images-ppt/8d1496d23b97.jpeg", description: "Sharp style for the little gentleman" },
+  { id: "p5", title: "Skin Fade", category: "barber", image: "https://sfile.chatglm.cn/images-ppt/d2ae10fe40f4.jpg", description: "Seamless bald fade blend" },
+  { id: "p6", title: "Gentleman's Package", category: "barber", image: "https://sfile.chatglm.cn/images-ppt/0a96904c1d1d.jpg", description: "Full grooming experience" },
+  { id: "p7", title: "Sleek Blowout", category: "hair", image: "https://sfile.chatglm.cn/images-ppt/e6bdb0ac0855.jpg", description: "Voluminous salon blow-dry", featured: true },
+  { id: "p8", title: "Balayage Glow", category: "hair", image: "https://sfile.chatglm.cn/images-ppt/a2d7fff25cc0.jpg", description: "Sun-kissed balayage transformation" },
+  { id: "p9", title: "Box Braids", category: "hair", image: "https://sfile.chatglm.cn/images-ppt/ecbe61b16c10.jpg", description: "Classic waist-length braids" },
+  { id: "p10", title: "Knotless Braids", category: "hair", image: "https://sfile.chatglm.cn/images-ppt/d256dbbeaff3.jpg", description: "Tension-free protective style" },
+  { id: "p11", title: "Natural Crown", category: "hair", image: "https://sfile.chatglm.cn/images-ppt/b7e66e3271bf.jpg", description: "Defined natural curls" },
+  { id: "p12", title: "Salon Wash", category: "hair", image: "https://sfile.chatglm.cn/images-ppt/338651ac1995.jpg", description: "Luxurious wash and blow-dry" },
+  { id: "p13", title: "Deep Tissue Massage", category: "spa", image: "https://sfile.chatglm.cn/images-ppt/9d1807b23c78.jpg", description: "Targeted tension relief", featured: true },
+  { id: "p14", title: "Hydrating Facial", category: "spa", image: "https://sfile.chatglm.cn/images-ppt/07556261e148.jpg", description: "Deep hydration facial results" },
+  { id: "p15", title: "Body Scrub", category: "spa", image: "https://sfile.chatglm.cn/images-ppt/8d3e16344557.jpg", description: "Full-body exfoliation polish" },
+  { id: "p16", title: "Spa Retreat", category: "spa", image: "https://sfile.chatglm.cn/images-ppt/aba8ca916eba.jpg", description: "Multi-treatment spa package" },
+  { id: "p17", title: "Gold Manicure", category: "nails", image: "https://sfile.chatglm.cn/images-ppt/da5149414cf2.jpg", description: "Gold-accented manicure", featured: true },
+  { id: "p18", title: "Spa Pedicure", category: "nails", image: "https://sfile.chatglm.cn/images-ppt/7ee1857bd0a1.jpg", description: "Pristine spa pedicure" },
+  { id: "p19", title: "Glossy Gel", category: "nails", image: "https://sfile.chatglm.cn/images-ppt/bd8f2a7a3c4b.jpg", description: "High-shine nude gel polish" },
+  { id: "p20", title: "Nail Art", category: "nails", image: "https://sfile.chatglm.cn/images-ppt/822456b454ff.png", description: "Bespoke acrylic nail art" },
 ];
 
 export interface Testimonial {
@@ -278,91 +323,91 @@ export interface Testimonial {
 export const TESTIMONIALS: Testimonial[] = [
   {
     id: "t1",
-    name: "Amara Wanjiku",
+    name: "Sharon Kotut",
     location: "Syokimau",
     rating: 5,
     text:
-      "I have been a client at Winnie's for over two years and I will not trust my hair to anyone else. The team is professional, the space is gorgeous, and every visit feels like a treat. My knotless braids lasted eight weeks and still looked fresh.",
-    service: "Knotless Braids",
+      "Been going here the last 7 years. Rispa and Freddie do a fantastic job. I love the manis, pedis and massages especially. The team is like family to me now — I wouldn't trust anyone else with my beauty needs.",
+    service: "Manicure, Pedicure & Massage",
+    date: "4 years ago",
+    avatar: "https://sfile.chatglm.cn/images-ppt/c21804e470f6.jpg",
+  },
+  {
+    id: "t2",
+    name: "Letting Eliphas",
+    location: "Local Guide · 220 reviews",
+    rating: 5,
+    text:
+      "Very hospitable and responsive staff. The customer service is top notch. I always leave feeling refreshed and well taken care of. Highly recommend Lizaya for anyone in the Syokimau area.",
+    service: "Haircut & Grooming",
+    date: "6 years ago",
+    avatar: "https://sfile.chatglm.cn/images-ppt/451f6aa330bd.jpg",
+  },
+  {
+    id: "t3",
+    name: "Brian Mwangi",
+    location: "Syokimau",
+    rating: 5,
+    text:
+      "Best barbershop in Syokimau, hands down. Freddie gives the cleanest fades I've had in years. The hot towel shave is the highlight of my week. Professional, clean, and great value for money.",
+    service: "Skin Fade & Hot Towel Shave",
+    date: "2 months ago",
+    avatar: "https://sfile.chatglm.cn/images-ppt/497b3a6ebc52.jpg",
+  },
+  {
+    id: "t4",
+    name: "Faith Wanjiru",
+    location: "Gateway Mall",
+    rating: 4,
+    text:
+      "Conveniently located in the mall — I get my hair done while running errands. The staff are friendly and the place is always clean. My braids lasted over six weeks. Will definitely be back.",
+    service: "Braiding",
+    date: "1 month ago",
+    avatar: "https://sfile.chatglm.cn/images-ppt/70ea40768411.jpg",
+  },
+  {
+    id: "t5",
+    name: "James Otieno",
+    location: "JKIA area",
+    rating: 5,
+    text:
+      "Came in for a quick trim before a flight and left with the best cut I've had in years. The barber took his time, listened to what I wanted, and delivered. Genuinely impressive service near the airport.",
+    service: "Men's Haircut",
+    date: "3 weeks ago",
+    avatar: "https://sfile.chatglm.cn/images-ppt/036bbfda6798.jpg",
+  },
+  {
+    id: "t6",
+    name: "Mary Achieng",
+    location: "Syokimau",
+    rating: 4,
+    text:
+      "The spa package was exactly what I needed after a long week. The massage was excellent and the facial left my skin glowing. The ambience is calm and relaxing. Good value for money.",
+    service: "Spa Retreat Package",
     date: "2 weeks ago",
     avatar: "https://sfile.chatglm.cn/images-ppt/9d42851274ef.jpg",
   },
   {
-    id: "t2",
-    name: "Faith Achieng",
-    location: "Katani",
-    rating: 5,
-    text:
-      "Best salon experience I have had in Kenya. Winnie did my bridal makeup and I felt like a queen on my wedding day. The attention to detail is unmatched. Highly recommend for any bride-to-be.",
-    service: "Bridal Makeup",
-    date: "1 month ago",
-    avatar: "https://sfile.chatglm.cn/images-ppt/94ec56f8fe9c.jpg",
-  },
-  {
-    id: "t3",
-    name: "Janet Mwangi",
-    location: "Athi River",
-    rating: 5,
-    text:
-      "The hair treatment brought my damaged hair back to life. The staff take time to understand your hair needs and recommend the right products. I left with soft, shiny, healthy hair. Thank you Winnie's team!",
-    service: "Hair Treatment",
-    date: "3 weeks ago",
-    avatar: "https://sfile.chatglm.cn/images-ppt/87c0034ed79d.jpg",
-  },
-  {
-    id: "t4",
-    name: "Cynthia Otieno",
-    location: "Kitengela",
-    rating: 5,
-    text:
-      "Their gel polish lasts three weeks without chipping. The salon is clean, modern, and very welcoming. I drive all the way from Kitengela because no other salon compares. Worth every shilling.",
-    service: "Gel Polish",
-    date: "1 week ago",
-    avatar: "https://sfile.chatglm.cn/images-ppt/5140c1a76725.jpg",
-  },
-  {
-    id: "t5",
-    name: "Lilian Kamau",
-    location: "Mlolongo",
-    rating: 5,
-    text:
-      "I came in for a facial and left glowing. The aesthetician was knowledgeable and walked me through every step. My skin has never looked better. I have already booked my next session.",
-    service: "Hydrating Facial",
-    date: "5 days ago",
-    avatar: "https://sfile.chatglm.cn/images-ppt/720409d7c7ab.jpg",
-  },
-  {
-    id: "t6",
-    name: "Sarah Njoki",
-    location: "Katani",
-    rating: 5,
-    text:
-      "Winnie's is my happy place. From the moment you walk in you are treated like royalty. The lash extensions look so natural people keep asking if they are real. Five stars all the way.",
-    service: "Eyelash Extensions",
-    date: "2 months ago",
-    avatar: "https://sfile.chatglm.cn/images-ppt/aab1d0f5caa5.jpg",
-  },
-  {
     id: "t7",
-    name: "Mary Atieno",
-    location: "Syokimau",
+    name: "David Kamau",
+    location: "Mavoko",
     rating: 5,
     text:
-      "Took my daughter here for her birthday treat — manicure, pedicure, and a blow dry. The team made her feel so special. The customer service is exceptional. We will definitely be back.",
-    service: "Manicure & Pedicure",
+      "Brought my son for his first proper haircut and the barber was so patient with him. Made the whole experience fun. My son now asks to go back. That's a win in my book. Highly recommend for kids' cuts.",
+    service: "Kids' Haircut",
     date: "1 month ago",
-    avatar: "https://sfile.chatglm.cn/images-ppt/40d6b26a9c0d.jpg",
+    avatar: "https://sfile.chatglm.cn/images-ppt/413cfda84f71.jpg",
   },
   {
     id: "t8",
-    name: "Beatrice Wambui",
-    location: "Katani",
-    rating: 5,
+    name: "Grace Njeri",
+    location: "Syokimau",
+    rating: 4,
     text:
-      "Best balayage in town! Winnie understood exactly what I wanted and the result exceeded my expectations. The color is beautiful and my hair still feels healthy. I am a customer for life.",
-    service: "Hair Coloring",
+      "I've been a loyal client for over two years. The team is friendly, the salon is hygienic, and the results speak for themselves. My gel polish lasts three weeks without chipping. Great place.",
+    service: "Gel Polish",
     date: "3 weeks ago",
-    avatar: "https://sfile.chatglm.cn/images-ppt/d12f07da2d15.jpg",
+    avatar: "https://sfile.chatglm.cn/images-ppt/130b580debd8.jpg",
   },
 ];
 
@@ -378,39 +423,39 @@ export interface Stylist {
 
 export const STYLISTS: Stylist[] = [
   {
-    id: "winnie",
-    name: "Winnie Achieng",
-    role: "Founder & Lead Stylist",
-    bio: "With over 12 years of experience and training in Nairobi, Dubai, and London, Winnie founded the studio with a vision to bring world-class beauty services to Katani. She specializes in hair coloring, treatments, and bridal styling.",
-    image: "https://sfile.chatglm.cn/images-ppt/df0444e28785.jpg",
-    specialties: ["Hair Coloring", "Bridal Styling", "Treatments"],
-    experience: "12+ years",
+    id: "rispa",
+    name: "Rispa",
+    role: "Senior Hair Stylist & Nail Artist",
+    bio: "Rispa has been with Lizaya since the beginning and is loved by long-term clients for her manis, pedis, and massages. With over 10 years of experience, she brings warmth and precision to every appointment.",
+    image: "https://sfile.chatglm.cn/images-ppt/c21804e470f6.jpg",
+    specialties: ["Manicure", "Pedicure", "Massage", "Nail Art"],
+    experience: "10+ years",
   },
   {
-    id: "grace",
-    name: "Grace Wanjiru",
-    role: "Senior Hair Stylist",
-    bio: "Grace is our braiding queen. From knotless braids to intricate Fulani styles, she combines speed with precision for a finish that protects your edges and lasts weeks.",
-    image: "https://sfile.chatglm.cn/images-ppt/04a2300f6c3d.png",
-    specialties: ["Braiding", "Natural Hair", "Twists"],
+    id: "freddie",
+    name: "Freddie",
+    role: "Master Barber",
+    bio: "Freddie is our go-to barber for fades, beard sculpting, and hot towel shaves. His attention to detail and steady hand have earned him a loyal following among our male clients.",
+    image: "https://sfile.chatglm.cn/images-ppt/451f6aa330bd.jpg",
+    specialties: ["Skin Fades", "Beard Grooming", "Hot Towel Shave"],
     experience: "8 years",
   },
   {
-    id: "lucy",
-    name: "Lucy Njeri",
-    role: "Nail & Beauty Artist",
-    bio: "Lucy brings artistry to every nail set and facial. Certified in advanced gel, acrylic, and skincare techniques, she ensures every detail is picture-perfect.",
-    image: "https://sfile.chatglm.cn/images-ppt/0eac04c19266.jpg",
-    specialties: ["Nail Art", "Facials", "Manicure"],
+    id: "amina",
+    name: "Amina",
+    role: "Spa Therapist & Facialist",
+    bio: "Amina specialises in massage therapy, facials, and body treatments. Certified in Swedish, deep tissue, and aromatherapy techniques, she creates a deeply relaxing experience for every client.",
+    image: "https://sfile.chatglm.cn/images-ppt/720409d7c7ab.jpg",
+    specialties: ["Massage", "Facials", "Body Scrub"],
     experience: "6 years",
   },
   {
-    id: "amina",
-    name: "Amina Hassan",
-    role: "Makeup Artist",
-    bio: "Amina's work has graced editorial shoots and over 200 brides. She specialises in HD, airbrush, and long-wear techniques that photograph flawlessly and last all day.",
-    image: "https://sfile.chatglm.cn/images-ppt/aabe1c4dc6ba.jpg",
-    specialties: ["Bridal Makeup", "Editorial", "Airbrush"],
+    id: "grace",
+    name: "Grace",
+    role: "Hair Colorist & Braiding Specialist",
+    bio: "Grace brings creativity and technical skill to every colour and braiding service. From subtle balayage to bold fashion tones, she'll help you achieve the look you've been dreaming of.",
+    image: "https://sfile.chatglm.cn/images-ppt/3a3344795fdd.jpg",
+    specialties: ["Hair Coloring", "Braiding", "Treatments"],
     experience: "7 years",
   },
 ];
@@ -426,44 +471,44 @@ export const FAQS: FAQItem[] = [
   {
     id: "f1",
     category: "appointments",
-    question: "How do I book an appointment?",
+    question: "Do I need an appointment or can I walk in?",
     answer:
-      "You can book online through our website's booking page, call us directly on +254 790 573509, or send us a WhatsApp message. We recommend booking at least 3 days in advance for weekend appointments and 2 weeks in advance for bridal services.",
+      "We welcome both walk-ins and booked appointments. However, to avoid wait times — especially on weekends and evenings — we strongly recommend booking in advance. You can book online via our website, call us on 0701 890354, or send a WhatsApp message.",
   },
   {
     id: "f2",
     category: "appointments",
     question: "What are your opening hours?",
     answer:
-      "We are open Monday to Friday from 8:00 AM to 8:00 PM, Saturday from 8:00 AM to 7:00 PM, and Sunday from 10:00 AM to 5:00 PM. We are closed on public holidays unless pre-arranged for bridal parties.",
+      "We're open Monday to Saturday from 8:00 AM to 9:30 PM, and Sunday from 10:00 AM to 8:00 PM. We're open late to accommodate busy schedules — perfect for after-work appointments.",
   },
   {
     id: "f3",
     category: "appointments",
-    question: "Do you accept walk-ins?",
+    question: "Where exactly are you located?",
     answer:
-      "We welcome walk-ins whenever we have availability, but we strongly recommend booking in advance to secure your preferred stylist and time slot. Walk-in clients may experience wait times during peak hours.",
+      "We're inside Gateway Mall, Syokimau, in the EK Physiotherapy building — near JKIA. Our plus code is JWP6+6X Nairobi. If you're coming from the airport, we're about 10-15 minutes away. There's ample parking at the mall.",
   },
   {
     id: "f4",
     category: "pricing",
     question: "What payment methods do you accept?",
     answer:
-      "We accept M-Pesa, cash, Visa and Mastercard. For bridal packages, a 50% deposit is required to secure the date, with the balance due on the day of service.",
+      "We accept M-Pesa, cash, and all major cards (Visa and Mastercard). For spa packages and bridal services, a 50% deposit is required to secure your slot, with the balance due on the day of service.",
   },
   {
     id: "f5",
     category: "pricing",
-    question: "Do you offer package deals?",
+    question: "Do you offer packages or combos?",
     answer:
-      "Yes! We offer bridal packages, monthly beauty memberships, and combination deals (e.g. hair + nails + facial). Check our pricing page or speak to our team for custom packages tailored to your needs.",
+      "Yes! We offer several packages: the Gentleman's Package (haircut + beard + shave + facial), the Spa Retreat Package (massage + facial + body scrub), and custom combos. Check our pricing page or ask our team for details.",
   },
   {
     id: "f6",
     category: "pricing",
-    question: "Are prices inclusive of products?",
+    question: "Are your prices the same for men and women?",
     answer:
-      "All standard service prices include the products used during the service. Premium add-on treatments, hair extensions, and specialty products are quoted separately and agreed with you before application.",
+      "Our barbershop services (men's cuts, fades, beard grooming) are priced separately from our hair salon services (styling, coloring, braiding). Spa and nail services are unisex and priced the same for everyone. See our pricing page for full details.",
   },
   {
     id: "f7",
@@ -475,37 +520,37 @@ export const FAQS: FAQItem[] = [
   {
     id: "f8",
     category: "hair-care",
-    question: "How often should I get a hair treatment?",
+    question: "How often should I get a haircut?",
     answer:
-      "For chemically-treated or heat-damaged hair, we recommend a treatment every 2–3 weeks until hair health is restored, then monthly for maintenance. Natural hair benefits from a deep conditioning treatment every 4–6 weeks.",
+      "For men's cuts, every 2–4 weeks maintains a sharp look. For women's hair, every 6–8 weeks for healthy ends. If you have a fade or skin fade, every 1–2 weeks keeps it looking fresh.",
   },
   {
     id: "f9",
     category: "hair-care",
-    question: "Can I bring my own hair products?",
+    question: "Do you offer services for children?",
     answer:
-      "Absolutely. If you have specific products you prefer, please bring them along and our stylists will be happy to use them. We will advise on compatibility with the service you are booking.",
+      "Yes! We offer kids' haircuts for children under 12 at a special rate. Our barbers are patient and experienced with children. For spa and nail services, we recommend children be 10+ and accompanied by an adult.",
   },
   {
     id: "f10",
     category: "policy",
     question: "What is your cancellation policy?",
     answer:
-      "We understand plans change. Cancellations or reschedules made 24 hours before your appointment are free. Within 24 hours, a 50% fee applies. No-shows are charged the full service amount. Bridal deposits are non-refundable within 14 days of the event.",
+      "Cancellations or reschedules made 12 hours before your appointment are free. Within 12 hours, a 50% fee applies. No-shows are charged the full service amount. We understand emergencies happen — just call us as early as possible.",
   },
   {
     id: "f11",
     category: "policy",
-    question: "Do you offer home or hotel services?",
+    question: "Do you offer bridal or group services?",
     answer:
-      "We offer on-location bridal and event services within the greater Nairobi area for an additional call-out fee. Please contact us at least 2 weeks in advance to arrange on-location services.",
+      "Yes, we offer bridal packages and group bookings for weddings, birthdays, and corporate events. Please contact us at least 2 weeks in advance to arrange bridal or group services. We can also come to your venue for an additional call-out fee.",
   },
   {
     id: "f12",
     category: "policy",
-    question: "Is the salon child-friendly?",
+    question: "Is the salon hygienic?",
     answer:
-      "Yes! We love seeing young clients. We offer children's braiding, haircuts, and basic nail services at special rates. Children under 12 must be accompanied by an adult throughout the service.",
+      "Absolutely. Hygiene is one of our top priorities. We sanitise all tools between clients, use single-use items where needed, and maintain a clean, fresh environment throughout the day. Many of our clients specifically mention our cleanliness in their reviews.",
   },
 ];
 
@@ -513,28 +558,28 @@ export interface GalleryImage {
   id: string;
   url: string;
   caption: string;
-  category: "hair" | "nails" | "makeup" | "facials" | "salon";
+  category: "hair" | "barber" | "spa" | "nails" | "salon";
 }
 
 export const GALLERY: GalleryImage[] = [
-  { id: "g1", url: "https://sfile.chatglm.cn/images-ppt/12a31a152fe9.jpg", caption: "Our flagship salon interior", category: "salon" },
-  { id: "g2", url: "https://sfile.chatglm.cn/images-ppt/7a5d8b07bb8c.jpeg", caption: "Styling stations", category: "salon" },
-  { id: "g3", url: "https://sfile.chatglm.cn/images-ppt/74ac5010ae4a.jpg", caption: "Sleek bob styling", category: "hair" },
-  { id: "g4", url: "https://sfile.chatglm.cn/images-ppt/1cdec30d3ac9.jpg", caption: "Knotless braids", category: "hair" },
-  { id: "g5", url: "https://sfile.chatglm.cn/images-ppt/6655e75c93bc.jpg", caption: "Balayage transformation", category: "hair" },
-  { id: "g6", url: "https://sfile.chatglm.cn/images-ppt/44a43fcb3aa2.jpg", caption: "Defined curls", category: "hair" },
-  { id: "g7", url: "https://sfile.chatglm.cn/images-ppt/b2dc2e1dafda.jpg", caption: "Rose quartz nails", category: "nails" },
-  { id: "g8", url: "https://sfile.chatglm.cn/images-ppt/13d3a950c249.jpg", caption: "Glossy gel manicure", category: "nails" },
-  { id: "g9", url: "https://sfile.chatglm.cn/images-ppt/bc0fc36754b1.jpg", caption: "Acrylic with chrome", category: "nails" },
-  { id: "g10", url: "https://sfile.chatglm.cn/images-ppt/006b28763775.jpg", caption: "Spa pedicure", category: "nails" },
-  { id: "g11", url: "https://sfile.chatglm.cn/images-ppt/04784dfeae4d.jpg", caption: "Bridal makeup", category: "makeup" },
-  { id: "g12", url: "https://sfile.chatglm.cn/images-ppt/2c284b29b962.jpg", caption: "Volume lashes", category: "makeup" },
-  { id: "g13", url: "https://sfile.chatglm.cn/images-ppt/04784dfeae4d.jpg", caption: "Editorial makeup", category: "makeup" },
-  { id: "g14", url: "https://sfile.chatglm.cn/images-ppt/7eefed5d5d7d.jpg", caption: "Hydrating facial", category: "facials" },
-  { id: "g15", url: "https://sfile.chatglm.cn/images-ppt/299e93bd86bb.jpg", caption: "Glow facial results", category: "facials" },
-  { id: "g16", url: "https://sfile.chatglm.cn/images-ppt/a861d31ab00d.jpg", caption: "Brightening treatment", category: "facials" },
-  { id: "g17", url: "https://sfile.chatglm.cn/images-ppt/cab219cbd04b.jpg", caption: "Reception lounge", category: "salon" },
-  { id: "g18", url: "https://sfile.chatglm.cn/images-ppt/d0f0d8bd1344.jpg", caption: "Premium products", category: "salon" },
+  { id: "g1", url: "https://sfile.chatglm.cn/images-ppt/99980ae52869.jpg", caption: "Our salon interior", category: "salon" },
+  { id: "g2", url: "https://sfile.chatglm.cn/images-ppt/bf1671d4931d.webp", caption: "Styling stations", category: "salon" },
+  { id: "g3", url: "https://sfile.chatglm.cn/images-ppt/2328b9abed67.jpg", caption: "Barbershop area", category: "salon" },
+  { id: "g4", url: "https://sfile.chatglm.cn/images-ppt/ebbe02a07294.jpg", caption: "Barber chairs", category: "salon" },
+  { id: "g5", url: "https://sfile.chatglm.cn/images-ppt/9d1807b23c78.jpg", caption: "Spa treatment room", category: "spa" },
+  { id: "g6", url: "https://sfile.chatglm.cn/images-ppt/8d3e16344557.jpg", caption: "Body scrub station", category: "spa" },
+  { id: "g7", url: "https://sfile.chatglm.cn/images-ppt/e6bdb0ac0855.jpg", caption: "Sleek blowout", category: "hair" },
+  { id: "g8", url: "https://sfile.chatglm.cn/images-ppt/a2d7fff25cc0.jpg", caption: "Balayage transformation", category: "hair" },
+  { id: "g9", url: "https://sfile.chatglm.cn/images-ppt/ecbe61b16c10.jpg", caption: "Box braids", category: "hair" },
+  { id: "g10", url: "https://sfile.chatglm.cn/images-ppt/d256dbbeaff3.jpg", caption: "Knotless braids", category: "hair" },
+  { id: "g11", url: "https://sfile.chatglm.cn/images-ppt/a11effd4f0e9.jpg", caption: "Precision fade", category: "barber" },
+  { id: "g12", url: "https://sfile.chatglm.cn/images-ppt/623063f5fad4.jpg", caption: "Beard sculpt", category: "barber" },
+  { id: "g13", url: "https://sfile.chatglm.cn/images-ppt/07ffed731941.jpg", caption: "Hot towel shave", category: "barber" },
+  { id: "g14", url: "https://sfile.chatglm.cn/images-ppt/d2ae10fe40f4.jpg", caption: "Skin fade", category: "barber" },
+  { id: "g15", url: "https://sfile.chatglm.cn/images-ppt/da5149414cf2.jpg", caption: "Gold manicure", category: "nails" },
+  { id: "g16", url: "https://sfile.chatglm.cn/images-ppt/bd8f2a7a3c4b.jpg", caption: "Glossy gel polish", category: "nails" },
+  { id: "g17", url: "https://sfile.chatglm.cn/images-ppt/822456b454ff.png", caption: "Acrylic nail art", category: "nails" },
+  { id: "g18", url: "https://sfile.chatglm.cn/images-ppt/07556261e148.jpg", caption: "Facial treatment", category: "spa" },
 ];
 
 export interface PricingPackage {
@@ -549,62 +594,60 @@ export interface PricingPackage {
 
 export const PACKAGES: PricingPackage[] = [
   {
-    id: "bridal",
-    name: "Bridal Royal",
-    description: "The complete bridal experience for your special day",
-    price: 35000,
-    duration: "Full day",
+    id: "gentleman",
+    name: "Gentleman's Package",
+    description: "The complete grooming experience for the modern man",
+    price: 1500,
+    duration: "90 min",
     includes: [
-      "Bridal makeup with airbrush",
-      "Hair styling & treatment",
-      "Manicure & pedicure",
-      "Facial treatment",
-      "Eyebrow shaping & lash extensions",
-      "Trial session 2 weeks prior",
-      "Touch-up kit for the day",
+      "Men's haircut with fade",
+      "Beard trim & shape",
+      "Hot towel straight-razor shave",
+      "Facial cleansing",
+      "Styling & aftercare",
     ],
     popular: true,
   },
   {
+    id: "spa-retreat",
+    name: "Spa Retreat Package",
+    description: "Over 3 hours of pure relaxation and renewal",
+    price: 8000,
+    duration: "3+ hours",
+    includes: [
+      "60-min massage (Swedish or deep tissue)",
+      "Full facial treatment",
+      "Body scrub & polish",
+      "Complimentary herbal tea",
+      "Scalp massage",
+    ],
+  },
+  {
     id: "glam",
     name: "Glam Up Package",
-    description: "Perfect for events, photoshoots, and date nights",
-    price: 8500,
+    description: "Perfect for events, date nights, and special occasions",
+    price: 6000,
     duration: "3 hours",
     includes: [
-      "Makeup application",
       "Hair styling (blow dry or updo)",
       "Manicure with gel polish",
+      "Facial treatment",
       "Eyebrow shaping",
+      "Makeup application",
     ],
   },
   {
-    id: "spa-day",
-    name: "Spa Retreat Day",
-    description: "A full day of pampering and renewal",
-    price: 12000,
-    duration: "4–5 hours",
+    id: "couples",
+    name: "Couples Spa Package",
+    description: "Relax together with side-by-side treatments",
+    price: 10000,
+    duration: "2 hours",
     includes: [
-      "Full body massage (60 min)",
-      "Hydrating facial",
-      "Spa manicure & pedicure",
-      "Hair treatment & blow dry",
+      "60-min couples massage",
+      "Facials for both",
       "Complimentary refreshments",
-    ],
-  },
-  {
-    id: "monthly",
-    name: "Monthly Beauty Membership",
-    description: "Stay polished all month long",
-    price: 9000,
-    duration: "Monthly",
-    includes: [
-      "2 hair wash & blow dry",
-      "1 gel polish refill",
-      "1 facial treatment",
-      "1 eyebrow shaping",
-      "15% off all additional services",
-      "Priority booking",
+      "Private treatment room",
+      "Romantic ambience setup",
     ],
   },
 ];
@@ -612,23 +655,23 @@ export const PACKAGES: PricingPackage[] = [
 export const OFFERS = [
   {
     id: "o1",
-    title: "New Client Special",
-    description: "Enjoy 15% off your first service at Winnie's. New clients only.",
-    code: "WELCOME15",
+    title: "First Visit Special",
+    description: "New clients get 10% off any service. Just mention this offer when booking.",
+    code: "LIZAYA10",
     expires: "Ongoing",
   },
   {
     id: "o2",
-    title: "Midweek Treat",
-    description: "Book any service Monday to Wednesday and get a free hair treatment add-on.",
-    code: "MIDWEEK",
+    title: "Weekday Lunchtime Deal",
+    description: "Book any haircut or manicure Monday–Thursday between 12 PM and 3 PM and get a free hair treatment add-on.",
+    code: "LUNCHTIME",
     expires: "Until end of year",
   },
   {
     id: "o3",
     title: "Bring a Friend",
-    description: "Book with a friend and you both receive 10% off your services.",
-    code: "FRIEND10",
+    description: "Book with a friend on the same day and you both get 15% off your services.",
+    code: "FRIENDS15",
     expires: "Ongoing",
   },
 ];

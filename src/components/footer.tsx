@@ -20,7 +20,6 @@ import { toast } from "sonner";
 import { cn } from "@/lib/utils";
 import { LogoMark } from "@/components/logo";
 
-// TikTok icon (lucide doesn't have one)
 function TikTokIcon({ className }: { className?: string }) {
   return (
     <svg viewBox="0 0 24 24" className={className} fill="currentColor" aria-hidden="true">
@@ -34,35 +33,24 @@ export function Footer() {
   const addSubscriber = useSalonStore((s) => s.addSubscriber);
   const [email, setEmail] = React.useState("");
 
-  const handleSubscribe = async (e: React.FormEvent) => {
+  const handleSubscribe = (e: React.FormEvent) => {
     e.preventDefault();
     if (!email.trim() || !email.includes("@")) {
       toast.error("Please enter a valid email address");
       return;
     }
     const ok = addSubscriber(email.trim());
-    if (!ok) {
+    if (ok) {
+      toast.success("Welcome to the Lizaya family! Check your inbox for a special welcome offer.");
+      setEmail("");
+    } else {
       toast.info("You're already subscribed to our newsletter.");
-      return;
     }
-    // Persist to server
-    try {
-      await fetch("/api/newsletter", {
-        method: "POST",
-        headers: { "Content-Type": "application/json" },
-        body: JSON.stringify({ email: email.trim() }),
-      });
-    } catch (err) {
-      console.error("[Newsletter] API call failed:", err);
-    }
-    toast.success("Welcome to the Winnie's family! Check your inbox for a special welcome offer.");
-    setEmail("");
   };
 
   return (
     <footer className="relative mt-auto bg-gradient-to-b from-background to-secondary/40 border-t border-border">
-      {/* Top decorative gold line */}
-      <div className="h-px bg-gradient-to-r from-transparent via-[#D4AF37]/40 to-transparent" />
+      <div className="h-px bg-gradient-to-r from-transparent via-[#C9A961]/40 to-transparent" />
 
       {/* Newsletter */}
       <div className="container-luxe py-12 sm:py-16 border-b border-border">
@@ -73,9 +61,9 @@ export function Footer() {
             viewport={{ once: true, margin: "-100px" }}
             transition={{ duration: 0.6 }}
           >
-            <p className="text-xs uppercase tracking-[0.3em] text-[#B76E79] mb-2">Stay in the loop</p>
+            <p className="text-xs uppercase tracking-[0.3em] text-[#0F4C3A] mb-2">Stay in the loop</p>
             <h3 className="font-serif text-2xl sm:text-3xl text-foreground text-balance">
-              Join our insider list for beauty tips, offers &amp; first dibs on appointments
+              Join our insider list for grooming tips, spa offers &amp; first dibs on appointments
             </h3>
           </motion.div>
           <motion.form
@@ -91,11 +79,11 @@ export function Footer() {
               placeholder="Enter your email address"
               value={email}
               onChange={(e) => setEmail(e.target.value)}
-              className="rounded-full bg-background border-border focus-visible:ring-[#B76E79]/40 h-12 px-5"
+              className="rounded-full bg-background border-border focus-visible:ring-[#0F4C3A]/40 h-12 px-5"
             />
             <Button
               type="submit"
-              className="bg-gradient-to-r from-[#B76E79] to-[#D4A574] hover:opacity-90 text-white rounded-full h-12 px-6 shrink-0 shadow-luxe"
+              className="bg-gradient-to-r from-[#0F4C3A] to-[#1A6B52] hover:opacity-90 text-white rounded-full h-12 px-6 shrink-0 shadow-luxe"
             >
               <Send className="h-4 w-4 mr-2" />
               Subscribe
@@ -109,16 +97,13 @@ export function Footer() {
         <div className="grid grid-cols-2 md:grid-cols-4 lg:grid-cols-5 gap-8 sm:gap-10">
           {/* Brand */}
           <div className="col-span-2">
-            <button
-              onClick={() => setView("home")}
-              className="flex items-center gap-3 mb-4 focus-luxe rounded-sm"
-            >
+            <button onClick={() => setView("home")} className="flex items-center gap-3 mb-4 focus-luxe rounded-sm">
               <div className="w-11 h-11 rounded-full overflow-hidden shadow-luxe">
                 <LogoMark size={44} className="w-full h-full" />
               </div>
               <div className="text-left">
-                <p className="font-serif text-lg font-semibold">Winnie's</p>
-                <p className="text-[10px] uppercase tracking-[0.2em] text-muted-foreground">Hair &amp; Beauty Studio</p>
+                <p className="font-serif text-lg font-semibold">Lizaya</p>
+                <p className="text-[10px] uppercase tracking-[0.2em] text-muted-foreground">Hair Studio</p>
               </div>
             </button>
             <p className="text-sm text-muted-foreground leading-relaxed max-w-sm">
@@ -140,27 +125,24 @@ export function Footer() {
           {/* Quick links */}
           <FooterCol title="Explore">
             {NAV_LINKS.map((l) => (
-              <FooterLink key={l.view} onClick={() => setView(l.view as any)}>
-                {l.label}
-              </FooterLink>
+              <FooterLink key={l.view} onClick={() => setView(l.view as any)}>{l.label}</FooterLink>
             ))}
             <FooterLink onClick={() => setView("faq")}>FAQ</FooterLink>
           </FooterCol>
 
           {/* Services */}
           <FooterCol title="Services">
-            {SERVICES.slice(0, 7).map((s) => (
-              <FooterLink key={s.id} onClick={() => setView("services")}>
-                {s.name}
-              </FooterLink>
-            ))}
+            <FooterLink onClick={() => setView("services")}>Hair Styling</FooterLink>
+            <FooterLink onClick={() => setView("services")}>Barbershop</FooterLink>
+            <FooterLink onClick={() => setView("services")}>SPA & Massage</FooterLink>
+            <FooterLink onClick={() => setView("services")}>Nails</FooterLink>
             <FooterLink onClick={() => setView("services")}>View all services →</FooterLink>
           </FooterCol>
 
           {/* Contact */}
           <FooterCol title="Visit Us">
             <li className="flex items-start gap-2 text-sm text-muted-foreground">
-              <MapPin className="h-4 w-4 text-[#B76E79] mt-0.5 shrink-0" />
+              <MapPin className="h-4 w-4 text-[#0F4C3A] mt-0.5 shrink-0" />
               <span>
                 {SALON_INFO.address.line1},<br />
                 {SALON_INFO.address.line2},<br />
@@ -168,29 +150,22 @@ export function Footer() {
               </span>
             </li>
             <li>
-              <a
-                href={`tel:${SALON_INFO.phoneRaw}`}
-                className="flex items-center gap-2 text-sm text-muted-foreground hover:text-foreground transition-colors"
-              >
-                <Phone className="h-4 w-4 text-[#B76E79] shrink-0" />
+              <a href={`tel:${SALON_INFO.phoneRaw}`} className="flex items-center gap-2 text-sm text-muted-foreground hover:text-foreground transition-colors">
+                <Phone className="h-4 w-4 text-[#0F4C3A] shrink-0" />
                 {SALON_INFO.phone}
               </a>
             </li>
             <li>
-              <a
-                href={`mailto:${SALON_INFO.email}`}
-                className="flex items-center gap-2 text-sm text-muted-foreground hover:text-foreground transition-colors break-all"
-              >
-                <Mail className="h-4 w-4 text-[#B76E79] shrink-0" />
+              <a href={`mailto:${SALON_INFO.email}`} className="flex items-center gap-2 text-sm text-muted-foreground hover:text-foreground transition-colors break-all">
+                <Mail className="h-4 w-4 text-[#0F4C3A] shrink-0" />
                 {SALON_INFO.email}
               </a>
             </li>
             <li className="flex items-start gap-2 text-sm text-muted-foreground">
-              <Clock className="h-4 w-4 text-[#B76E79] mt-0.5 shrink-0" />
+              <Clock className="h-4 w-4 text-[#0F4C3A] mt-0.5 shrink-0" />
               <span>
-                Mon–Fri: 8AM – 8PM<br />
-                Sat: 8AM – 7PM<br />
-                Sun: 10AM – 5PM
+                Mon–Sat: 8AM – 9:30PM<br />
+                Sun: 10AM – 8PM
               </span>
             </li>
           </FooterCol>
@@ -202,18 +177,12 @@ export function Footer() {
         <div className="container-luxe py-5 flex flex-col sm:flex-row items-center justify-between gap-3 text-xs text-muted-foreground">
           <p className="flex items-center gap-1.5">
             © {new Date().getFullYear()} {SALON_INFO.name}. Made with
-            <Heart className="h-3 w-3 text-[#B76E79] fill-[#B76E79]" /> in Kenya.
+            <Heart className="h-3 w-3 text-[#0F4C3A] fill-[#0F4C3A]" /> in Kenya.
           </p>
           <div className="flex items-center gap-4">
-            <button onClick={() => setView("privacy")} className="hover:text-foreground transition-colors">
-              Privacy Policy
-            </button>
-            <button onClick={() => setView("terms")} className="hover:text-foreground transition-colors">
-              Terms of Service
-            </button>
-            <button onClick={() => setView("admin")} className="hover:text-foreground transition-colors">
-              Admin
-            </button>
+            <button onClick={() => setView("privacy")} className="hover:text-foreground transition-colors">Privacy Policy</button>
+            <button onClick={() => setView("terms")} className="hover:text-foreground transition-colors">Terms of Service</button>
+            <button onClick={() => setView("admin")} className="hover:text-foreground transition-colors">Admin</button>
           </div>
         </div>
       </div>
@@ -221,22 +190,14 @@ export function Footer() {
   );
 }
 
-function SocialButton({
-  href,
-  label,
-  children,
-}: {
-  href: string;
-  label: string;
-  children: React.ReactNode;
-}) {
+function SocialButton({ href, label, children }: { href: string; label: string; children: React.ReactNode }) {
   return (
     <a
       href={href}
       target="_blank"
       rel="noopener noreferrer"
       aria-label={label}
-      className="w-9 h-9 rounded-full border border-border flex items-center justify-center text-muted-foreground hover:text-white hover:bg-gradient-to-br hover:from-[#B76E79] hover:to-[#D4A574] hover:border-transparent transition-all duration-300"
+      className="w-9 h-9 rounded-full border border-border flex items-center justify-center text-muted-foreground hover:text-white hover:bg-gradient-to-br hover:from-[#0F4C3A] hover:to-[#1A6B52] hover:border-transparent transition-all duration-300"
     >
       {children}
     </a>
@@ -246,27 +207,16 @@ function SocialButton({
 function FooterCol({ title, children }: { title: string; children: React.ReactNode }) {
   return (
     <div>
-      <h4 className="font-serif text-sm font-semibold uppercase tracking-wider text-foreground mb-4">
-        {title}
-      </h4>
+      <h4 className="font-serif text-sm font-semibold uppercase tracking-wider text-foreground mb-4">{title}</h4>
       <ul className="space-y-2.5">{children}</ul>
     </div>
   );
 }
 
-function FooterLink({
-  children,
-  onClick,
-}: {
-  children: React.ReactNode;
-  onClick: () => void;
-}) {
+function FooterLink({ children, onClick }: { children: React.ReactNode; onClick: () => void }) {
   return (
     <li>
-      <button
-        onClick={onClick}
-        className="text-sm text-muted-foreground hover:text-foreground transition-colors text-left focus-luxe rounded-sm"
-      >
+      <button onClick={onClick} className="text-sm text-muted-foreground hover:text-foreground transition-colors text-left focus-luxe rounded-sm">
         {children}
       </button>
     </li>

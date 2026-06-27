@@ -40,7 +40,7 @@ export function FaqView() {
         eyebrow="FAQ"
         title={
           <>
-            Questions, <span className="text-gradient-rose">answered</span>
+            Questions, <span className="text-gradient-emerald">answered</span>
           </>
         }
         subtitle="Everything you need to know before your visit. Can't find your question? Reach out — we love to help."
@@ -58,7 +58,7 @@ export function FaqView() {
                 className={cn(
                   "px-4 py-2 rounded-full text-sm font-medium transition-all",
                   category === c.value
-                    ? "bg-gradient-to-r from-[#B76E79] to-[#D4A574] text-white shadow-luxe"
+                    ? "bg-gradient-to-r from-[#0F4C3A] to-[#1A6B52] text-white shadow-luxe"
                     : "bg-secondary/60 text-muted-foreground hover:bg-secondary"
                 )}
               >
@@ -99,9 +99,9 @@ export function FaqView() {
             whileInView={{ opacity: 1, y: 0 }}
             viewport={{ once: true, margin: "-80px" }}
             transition={{ duration: 0.6 }}
-            className="mt-12 text-center p-8 rounded-3xl bg-gradient-to-br from-[#B76E79]/10 to-[#D4AF37]/10 border border-[#B76E79]/20"
+            className="mt-12 text-center p-8 rounded-3xl bg-gradient-to-br from-[#0F4C3A]/10 to-[#C9A961]/10 border border-[#0F4C3A]/20"
           >
-            <HelpCircle className="h-10 w-10 text-[#B76E79] mx-auto mb-4" />
+            <HelpCircle className="h-10 w-10 text-[#0F4C3A] mx-auto mb-4" />
             <h3 className="font-serif text-xl font-semibold mb-2">Still have questions?</h3>
             <p className="text-sm text-muted-foreground mb-6 max-w-md mx-auto">
               Our team is happy to help. Reach out and we'll get back to you within hours.
@@ -110,14 +110,14 @@ export function FaqView() {
               <Button
                 onClick={() => (window.location.href = `tel:${SALON_INFO.phoneRaw}`)}
                 variant="outline"
-                className="rounded-full border-[#B76E79]/30 hover:bg-[#B76E79]/5"
+                className="rounded-full border-[#0F4C3A]/30 hover:bg-[#0F4C3A]/5"
               >
                 <Phone className="h-4 w-4 mr-2" />
                 Call {SALON_INFO.phone}
               </Button>
               <Button
                 onClick={() => setView("contact")}
-                className="bg-gradient-to-r from-[#B76E79] to-[#D4A574] hover:opacity-90 text-white rounded-full"
+                className="bg-gradient-to-r from-[#0F4C3A] to-[#1A6B52] hover:opacity-90 text-white rounded-full"
               >
                 <MessageCircle className="h-4 w-4 mr-2" />
                 Send a Message

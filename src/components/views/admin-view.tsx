@@ -32,11 +32,11 @@ import { toast } from "sonner";
 import { cn } from "@/lib/utils";
 import { format } from "date-fns";
 
-const ADMIN_PASSWORD = process.env.NEXT_PUBLIC_ADMIN_PASSWORD || "winnie2024";
+const ADMIN_PASSWORD = process.env.NEXT_PUBLIC_ADMIN_PASSWORD || "lizaya2024";
 
 // Helper for admin API calls
 async function adminFetch(path: string, options: RequestInit = {}) {
-  const token = typeof window !== "undefined" ? localStorage.getItem("winnies-admin-token") : null;
+  const token = typeof window !== "undefined" ? localStorage.getItem("lizaya-admin-token") : null;
   const headers: Record<string, string> = {
     "Content-Type": "application/json",
     ...(options.headers as Record<string, string> || {}),
@@ -64,26 +64,26 @@ export function AdminView() {
       if (res.ok) {
         const data = await res.json();
         if (data.token) {
-          localStorage.setItem("winnies-admin-token", data.token);
+          localStorage.setItem("lizaya-admin-token", data.token);
         }
         setAdminAuthed(true);
-        toast.success("Welcome back, Winnie!");
+        toast.success("Welcome back!");
       } else {
         // Fallback to client-side check (demo mode)
         if (password === ADMIN_PASSWORD) {
-          localStorage.setItem("winnies-admin-token", ADMIN_PASSWORD);
+          localStorage.setItem("lizaya-admin-token", ADMIN_PASSWORD);
           setAdminAuthed(true);
-          toast.success("Welcome back, Winnie!");
+          toast.success("Welcome back!");
         } else {
-          toast.error("Incorrect password. Hint: winnie2024");
+          toast.error("Incorrect password. Hint: lizaya2024");
         }
       }
     } catch (err) {
       // Network error — fallback to client-side check
       if (password === ADMIN_PASSWORD) {
-        localStorage.setItem("winnies-admin-token", ADMIN_PASSWORD);
+        localStorage.setItem("lizaya-admin-token", ADMIN_PASSWORD);
         setAdminAuthed(true);
-        toast.success("Welcome back, Winnie!");
+        toast.success("Welcome back!");
       } else {
         toast.error("Incorrect password.");
       }
@@ -94,7 +94,7 @@ export function AdminView() {
   if (!adminAuthed) {
     return (
       <div>
-        <PageHeader eyebrow="Admin" title={<>Studio <span className="text-gradient-rose">dashboard</span></>} />
+        <PageHeader eyebrow="Admin" title={<>Studio <span className="text-gradient-emerald">dashboard</span></>} />
         <section className="pb-20">
           <div className="container-luxe max-w-md">
             <motion.form
@@ -126,13 +126,13 @@ export function AdminView() {
                 <Button
                   type="submit"
                   disabled={authenticating}
-                  className="w-full bg-gradient-to-r from-[#B76E79] to-[#D4A574] hover:opacity-90 text-white rounded-full"
+                  className="w-full bg-gradient-to-r from-[#0F4C3A] to-[#1A6B52] hover:opacity-90 text-white rounded-full"
                 >
                   {authenticating ? "Signing in…" : "Sign In"}
                 </Button>
               </div>
               <p className="text-xs text-muted-foreground text-center mt-4">
-                Demo password: <code className="px-1.5 py-0.5 rounded bg-secondary font-mono">winnie2024</code>
+                Demo password: <code className="px-1.5 py-0.5 rounded bg-secondary font-mono">lizaya2024</code>
               </p>
             </motion.form>
           </div>
@@ -150,17 +150,17 @@ function AdminDashboard() {
 
   return (
     <div className="min-h-screen">
-      <PageHeader eyebrow="Admin" title={<>Studio <span className="text-gradient-rose">dashboard</span></>} />
+      <PageHeader eyebrow="Admin" title={<>Studio <span className="text-gradient-emerald">dashboard</span></>} />
       <section className="pb-20">
         <div className="container-luxe">
           <div className="flex items-center justify-between mb-6">
             <p className="text-sm text-muted-foreground">
-              Logged in as <strong className="text-foreground">Winnie Achieng</strong>
+              Logged in as <strong className="text-foreground">Lizaya Admin</strong>
             </p>
             <Button
               onClick={() => {
                 if (typeof window !== "undefined") {
-                  localStorage.removeItem("winnies-admin-token");
+                  localStorage.removeItem("lizaya-admin-token");
                 }
                 setAdminAuthed(false);
                 toast.info("You've been signed out.");
@@ -250,10 +250,10 @@ function OverviewTab() {
     <div className="space-y-6">
       {/* Stats */}
       <div className="grid grid-cols-2 lg:grid-cols-4 gap-4">
-        <StatCard icon={DollarSign} label="Revenue" value={`KSh ${totalRevenue.toLocaleString()}`} trend="+12%" accent="bg-[#D4AF37]/15 text-[#D4AF37]" />
-        <StatCard icon={Calendar} label="Bookings" value={bookings.length} trend="+8%" accent="bg-[#B76E79]/15 text-[#B76E79]" />
+        <StatCard icon={DollarSign} label="Revenue" value={`KSh ${totalRevenue.toLocaleString()}`} trend="+12%" accent="bg-[#D4AF37]/15 text-[#C9A961]" />
+        <StatCard icon={Calendar} label="Bookings" value={bookings.length} trend="+8%" accent="bg-[#0F4C3A]/15 text-[#0F4C3A]" />
         <StatCard icon={MessageSquare} label="Messages" value={messages.length} accent="bg-[#D4A574]/15 text-[#D4A574]" />
-        <StatCard icon={Mail} label="Subscribers" value={subscribers.length} trend="+5%" accent="bg-[#B76E79]/15 text-[#B76E79]" />
+        <StatCard icon={Mail} label="Subscribers" value={subscribers.length} trend="+5%" accent="bg-[#0F4C3A]/15 text-[#0F4C3A]" />
       </div>
 
       {/* Quick alerts */}
@@ -323,7 +323,7 @@ function BookingsTab() {
             className={cn(
               "px-3 py-1.5 rounded-full text-xs font-medium capitalize transition-all",
               filter === f
-                ? "bg-gradient-to-r from-[#B76E79] to-[#D4A574] text-white"
+                ? "bg-gradient-to-r from-[#0F4C3A] to-[#1A6B52] text-white"
                 : "bg-secondary/60 text-muted-foreground hover:bg-secondary"
             )}
           >
@@ -388,7 +388,7 @@ function BookingsTab() {
               )}
 
               <div className="flex items-center justify-between pt-3 border-t border-border">
-                <p className="font-serif text-sm font-bold text-gradient-rose">
+                <p className="font-serif text-sm font-bold text-gradient-emerald">
                   KSh {b.price.toLocaleString()}
                 </p>
                 <div className="flex items-center gap-2">
@@ -478,7 +478,7 @@ function MessagesTab() {
           animate={{ opacity: 1, y: 0 }}
           className={cn(
             "bg-card rounded-2xl p-5 shadow-luxe border border-border",
-            !m.read && "ring-2 ring-[#B76E79]/30"
+            !m.read && "ring-2 ring-[#0F4C3A]/30"
           )}
         >
           <div className="flex items-start justify-between gap-3 mb-2">
@@ -531,7 +531,7 @@ function ServicesTab() {
         <p className="text-sm text-muted-foreground">
           {services.length} services · Edit prices and details below
         </p>
-        <Button size="sm" className="rounded-full bg-gradient-to-r from-[#B76E79] to-[#D4A574] text-white">
+        <Button size="sm" className="rounded-full bg-gradient-to-r from-[#0F4C3A] to-[#1A6B52] text-white">
           + Add Service
         </Button>
       </div>
@@ -544,7 +544,7 @@ function ServicesTab() {
                 <p className="font-serif text-sm font-semibold">{s.name}</p>
                 <p className="text-xs text-muted-foreground capitalize">{s.category}</p>
               </div>
-              {s.popular && <Star className="h-4 w-4 text-[#D4AF37] fill-[#D4AF37]" />}
+              {s.popular && <Star className="h-4 w-4 text-[#C9A961] fill-[#D4AF37]" />}
             </div>
             <div className="flex items-center gap-2 mt-3">
               <Input
@@ -618,7 +618,7 @@ function GalleryTab() {
       formData.append("signature", sig.signature);
       formData.append("timestamp", sig.timestamp.toString());
       formData.append("api_key", sig.apiKey);
-      formData.append("folder", "winnies-salon");
+      formData.append("folder", "lizaya-studio");
 
       const uploadRes = await fetch(sig.uploadUrl, {
         method: "POST",
@@ -647,7 +647,7 @@ function GalleryTab() {
         <p className="text-sm text-muted-foreground">Manage portfolio images</p>
         <Button
           size="sm"
-          className="rounded-full bg-gradient-to-r from-[#B76E79] to-[#D4A574] text-white"
+          className="rounded-full bg-gradient-to-r from-[#0F4C3A] to-[#1A6B52] text-white"
           onClick={() => fileInputRef.current?.click()}
           disabled={uploading || !uploadStatus?.enabled}
         >
@@ -702,7 +702,7 @@ function GalleryTab() {
       )}
 
       <p className="text-xs text-muted-foreground text-center">
-        To enable uploads: sign up at <a href="https://cloudinary.com" target="_blank" rel="noopener noreferrer" className="text-[#B76E79] hover:underline">cloudinary.com</a> and add CLOUDINARY_CLOUD_NAME, CLOUDINARY_API_KEY, and CLOUDINARY_API_SECRET to your <code className="px-1 py-0.5 rounded bg-secondary font-mono">.env</code> file.
+        To enable uploads: sign up at <a href="https://cloudinary.com" target="_blank" rel="noopener noreferrer" className="text-[#0F4C3A] hover:underline">cloudinary.com</a> and add CLOUDINARY_CLOUD_NAME, CLOUDINARY_API_KEY, and CLOUDINARY_API_SECRET to your <code className="px-1 py-0.5 rounded bg-secondary font-mono">.env</code> file.
       </p>
     </div>
   );

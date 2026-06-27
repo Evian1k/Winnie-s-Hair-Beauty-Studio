@@ -31,7 +31,7 @@ export interface CloudinarySignature {
   uploadUrl: string;
 }
 
-export function generateUploadSignature(folder = "winnies-salon"): CloudinarySignature | null {
+export function generateUploadSignature(folder = "lizaya-studio"): CloudinarySignature | null {
   if (!cloudinaryEnabled) return null;
 
   const timestamp = Math.round(Date.now() / 1000);
@@ -86,8 +86,8 @@ export async function deleteImage(publicId: string): Promise<boolean> {
 
 /**
  * Extract the public_id from a Cloudinary URL.
- * Example: https://res.cloudinary.com/mycloud/image/upload/v123/winnies-salon/abc.jpg
- * Returns: winnies-salon/abc
+ * Example: https://res.cloudinary.com/mycloud/image/upload/v123/lizaya-studio/abc.jpg
+ * Returns: lizaya-studio/abc
  */
 export function extractPublicId(url: string): string | null {
   try {
